@@ -379,12 +379,6 @@ function generateCertificate() {
     });
   }
 
-  // Element kurz anzeigen für html2canvas
-  certificateElement.style.display = "block";
-  certificateElement.style.position = "absolute";
-  certificateElement.style.top = "0";
-  certificateElement.style.left = "0";
-
   console.log("html2canvas wird aufgerufen");
 
   // HTML zu PNG konvertieren
@@ -1969,15 +1963,6 @@ function closeLegalModal() {
   if (modal) {
     modal.style.display = "none";
     document.body.classList.remove("modal-open");
-  }
-}
-
-function checkBuilderPin() {
-  const pin = prompt("Bitte gib den PIN für den Builder Test ein:");
-  if (pin === "1234") {
-    showModal("Zugang gewährt", "Du hast Zugriff auf den Builder Test.");
-  } else if (pin !== null) {
-    showModal("Zugang verweigert", "Falscher PIN. Bitte versuche es erneut.");
   }
 }
 
