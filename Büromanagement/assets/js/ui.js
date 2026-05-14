@@ -401,18 +401,16 @@ function generateCertificate() {
     certificateElement.style.top = "-9999px";
     certificateElement.style.left = "-9999px";
 
-    // Canvas zu Blob konvertieren und herunterladen
-    canvas.toBlob(blob => {
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `Zertifikat_Buromanagement_${playerName.replace(/\s+/g, "_")}.png`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-      console.log("Download gestartet");
-    }, "image/png");
+    // Canvas zu Data URL konvertieren und herunterladen
+    const dataUrl = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = `Zertifikat_Buromanagement_${playerName.replace(/\s+/g, "_")}.png`;
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    console.log("Download gestartet");
   }).catch(error => {
     console.error("Fehler beim Erstellen des Zertifikats:", error);
     certificateElement.style.display = "none";
