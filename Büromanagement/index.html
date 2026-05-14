@@ -7,6 +7,11 @@
         <link rel="stylesheet" href="../assets/css/style.css" />
         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
         <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        <script>
+            if (window.innerWidth < 1024) {
+                document.body.innerHTML = "<h1>Bitte mit PC öffnen</h1>";
+            }
+        </script>
     </head>
     <body>
         <!-- Start Screen -->
@@ -476,12 +481,6 @@
 
                     <button onclick="nextTutorialStep()">Weiter</button>
                 </section>
-
-                <script>
-                    if (window.innerWidth < 1024) {
-                        document.body.innerHTML = "<h1>Bitte mit PC öffnen</h1>";
-                    }
-                </script>
 
                 <!-- Tutorial Section -->
                 <section
@@ -3109,50 +3108,71 @@
 
         <!-- Zertifikat-Element (versteckt) -->
         <div id="certificateElement" style="display: none; position: absolute; top: -9999px; left: -9999px;">
-            <div style="width: 800px; height: 600px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; font-family: Arial, sans-serif;">
-                <div style="background: white; border-radius: 20px; padding: 40px; height: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
-                    <div style="text-align: center; margin-bottom: 30px;">
-                        <img src="../assets/images/Logo/Logo.png" alt="ALO Academy Logo" style="width: 80px; height: 80px; margin-bottom: 20px;">
-                        <h1 style="color: #667eea; font-size: 36px; margin: 0;">Zertifikat</h1>
-                        <p style="color: #764ba2; font-size: 18px; margin: 10px 0 0 0;">Büromanagement</p>
+            <div style="width: 794px; height: 1123px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 50px; font-family: Arial, sans-serif;">
+                <div style="background: white; border-radius: 20px; padding: 50px; height: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.2); position: relative;">
+                    <!-- Logo oben links -->
+                    <div style="position: absolute; top: 30px; left: 30px;">
+                        <img src="../assets/images/Logo/Logo.png" alt="ALO Academy Logo" style="width: 80px; height: 80px;">
                     </div>
-                    <div style="text-align: center; margin-bottom: 30px;">
-                        <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
-                            <span style="color: white; font-size: 48px;">🎓</span>
+                    
+                    <!-- Titel -->
+                    <div style="text-align: center; margin-top: 120px; margin-bottom: 50px;">
+                        <h1 style="color: #667eea; font-size: 48px; margin: 0; font-weight: bold;">Zertifikat</h1>
+                        <p style="color: #764ba2; font-size: 24px; margin: 15px 0 0 0; font-weight: 500;">Büromanagement</p>
+                    </div>
+                    
+                    <!-- Graduations-Symbol -->
+                    <div style="text-align: center; margin-bottom: 50px;">
+                        <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);">
+                            <span style="color: white; font-size: 60px;">🎓</span>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-bottom: 30px;">
-                        <p style="color: #333; font-size: 16px; margin: 0;">Hiermit wird bescheinigt, dass</p>
-                        <h2 id="certificateName" style="color: #667eea; font-size: 28px; margin: 10px 0;">[Name]</h2>
-                        <p style="color: #333; font-size: 16px; margin: 0;">alle Missionen erfolgreich abgeschlossen hat</p>
+                    
+                    <!-- Bescheinigungstext -->
+                    <div style="text-align: center; margin-bottom: 50px;">
+                        <p style="color: #333; font-size: 20px; margin: 0; line-height: 1.6;">Hiermit wird bescheinigt, dass</p>
+                        <h2 id="certificateName" style="color: #667eea; font-size: 36px; margin: 20px 0; font-weight: bold;">[Name]</h2>
+                        <p style="color: #333; font-size: 20px; margin: 0; line-height: 1.6;">alle Missionen erfolgreich abgeschlossen hat</p>
                     </div>
-                    <div style="text-align: center; margin-bottom: 30px;">
-                        <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
+                    
+                    <!-- Missionen-Übersicht -->
+                    <div style="text-align: center; margin-bottom: 60px;">
+                        <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px;">
                             <div style="text-align: center;">
-                                <div style="color: #667eea; font-size: 24px; font-weight: bold;">✓</div>
-                                <p style="color: #333; font-size: 14px; margin: 5px 0 0 0;">Mission 1</p>
-                                <p style="color: #666; font-size: 12px;">Bestellannahme</p>
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <span style="color: white; font-size: 30px; font-weight: bold;">✓</span>
+                                </div>
+                                <p style="color: #333; font-size: 16px; margin: 0; font-weight: bold;">Mission 1</p>
+                                <p style="color: #666; font-size: 14px; margin: 5px 0 0 0;">Bestellannahme</p>
                             </div>
                             <div style="text-align: center;">
-                                <div style="color: #667eea; font-size: 24px; font-weight: bold;">✓</div>
-                                <p style="color: #333; font-size: 14px; margin: 5px 0 0 0;">Mission 2</p>
-                                <p style="color: #666; font-size: 12px;">Rechnungseingabe</p>
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <span style="color: white; font-size: 30px; font-weight: bold;">✓</span>
+                                </div>
+                                <p style="color: #333; font-size: 16px; margin: 0; font-weight: bold;">Mission 2</p>
+                                <p style="color: #666; font-size: 14px; margin: 5px 0 0 0;">Rechnungseingabe</p>
                             </div>
                             <div style="text-align: center;">
-                                <div style="color: #667eea; font-size: 24px; font-weight: bold;">✓</div>
-                                <p style="color: #333; font-size: 14px; margin: 5px 0 0 0;">Mission 3</p>
-                                <p style="color: #666; font-size: 12px;">Kommunikation</p>
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <span style="color: white; font-size: 30px; font-weight: bold;">✓</span>
+                                </div>
+                                <p style="color: #333; font-size: 16px; margin: 0; font-weight: bold;">Mission 3</p>
+                                <p style="color: #666; font-size: 14px; margin: 5px 0 0 0;">Kommunikation</p>
                             </div>
                             <div style="text-align: center;">
-                                <div style="color: #667eea; font-size: 24px; font-weight: bold;">✓</div>
-                                <p style="color: #333; font-size: 14px; margin: 5px 0 0 0;">Mission 4</p>
-                                <p style="color: #666; font-size: 12px;">Budget-Management</p>
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                                    <span style="color: white; font-size: 30px; font-weight: bold;">✓</span>
+                                </div>
+                                <p style="color: #333; font-size: 16px; margin: 0; font-weight: bold;">Mission 4</p>
+                                <p style="color: #666; font-size: 14px; margin: 5px 0 0 0;">Budget-Management</p>
                             </div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 40px;">
-                        <p style="color: #666; font-size: 14px; margin: 0;">ALO Academy - Büromanagement Training</p>
-                        <p id="certificateDate" style="color: #999; font-size: 12px; margin: 5px 0 0 0;">[Datum]</p>
+                    
+                    <!-- Footer -->
+                    <div style="text-align: center; margin-top: auto; padding-top: 40px; border-top: 2px solid #f0f0f0;">
+                        <p style="color: #666; font-size: 16px; margin: 0; font-weight: 500;">ALO Academy - Büromanagement Training</p>
+                        <p id="certificateDate" style="color: #999; font-size: 14px; margin: 10px 0 0 0;">[Datum]</p>
                     </div>
                 </div>
             </div>
