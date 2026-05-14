@@ -379,6 +379,12 @@ function generateCertificate() {
     });
   }
 
+  // Element kurz anzeigen für html2canvas
+  certificateElement.style.display = "block";
+  certificateElement.style.position = "absolute";
+  certificateElement.style.top = "0";
+  certificateElement.style.left = "0";
+
   console.log("html2canvas wird aufgerufen");
 
   // HTML zu PNG konvertieren
