@@ -7,11 +7,6 @@
         <link rel="stylesheet" href="../assets/css/style.css" />
         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
         <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-        <script>
-            if (window.innerWidth < 1024) {
-                document.body.innerHTML = "<h1>Bitte mit PC öffnen</h1>";
-            }
-        </script>
     </head>
     <body>
         <!-- Start Screen -->
@@ -481,6 +476,12 @@
 
                     <button onclick="nextTutorialStep()">Weiter</button>
                 </section>
+
+                <script>
+                    if (window.innerWidth < 1024) {
+                        document.body.innerHTML = "<h1>Bitte mit PC öffnen</h1>";
+                    }
+                </script>
 
                 <!-- Tutorial Section -->
                 <section
