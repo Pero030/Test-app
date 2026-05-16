@@ -104,55 +104,93 @@ function exportShopAsPNG() {
     return Promise.reject();
   }
 
-  // Sicherstellen, dass wir oben am Element sind für den Snapshot
-  window.scrollTo(0, 0);
+  // Zertifikat mit Shop-Vorschau erstellen
+  return generateCertificate();
+}
 
-  return html2canvas(preview, {
+function generateCertificate() {
+  const certificateElement = document.getElementById("certificateElement");
+  const preview = document.getElementById('shopLivePreview');
+  
+  if (!certificateElement) {
+    console.error("Zertifikat-Element nicht gefunden");
+    return Promise.reject();
+  }
+
+  if (!preview) {
+    console.error("Shop-Vorschau nicht gefunden");
+    return Promise.reject();
+  }
+
+  // Spielername und Datum aktualisieren
+  const playerName = localStorage.getItem("ecommercePlayerName") || "Spieler";
+  const nameElement = document.getElementById("certificateName");
+  const dateElement = document.getElementById("certificateDate");
+  const shopPreviewElement = document.getElementById("certificateShopPreview");
+  
+  if (nameElement) {
+    nameElement.textContent = playerName;
+  }
+  
+  if (dateElement) {
+    const today = new Date();
+    dateElement.textContent = today.toLocaleDateString("de-DE", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    });
+  }
+
+  // Shop-Vorschau in das Zertifikat einfügen
+  if (shopPreviewElement) {
+    // Klon der Shop-Vorschau erstellen
+    const previewClone = preview.cloneNode(true);
+    previewClone.style.transform = "scale(0.5)";
+    previewClone.style.transformOrigin = "top left";
+    previewClone.style.width = "200%";
+    previewClone.style.height = "auto";
+    shopPreviewElement.innerHTML = "";
+    shopPreviewElement.appendChild(previewClone);
+  }
+
+  // Element kurz anzeigen für html2canvas
+  certificateElement.style.display = "block";
+  certificateElement.style.position = "absolute";
+  certificateElement.style.top = "0";
+  certificateElement.style.left = "0";
+
+  console.log("html2canvas wird aufgerufen");
+
+  // HTML zu PNG konvertieren
+  return html2canvas(certificateElement, {
     scale: 2,
-    backgroundColor: "#ffffff",
     useCORS: true,
+    backgroundColor: "#ffffff",
     allowTaint: true
-  }).then(async canvas => {
-    try {
-      const imgData = canvas.toDataURL('image/png');
-      
-      // Moderner Windows-Speicherdialog (funktioniert perfekt auf GitHub Pages/HTTPS)
-      if (window.showSaveFilePicker) {
-        try {
-          const handle = await window.showSaveFilePicker({
-            suggestedName: 'mein-shop-design.png',
-            types: [{
-              description: 'PNG Image',
-              accept: {'image/png': ['.png']},
-            }],
-          });
-          const writable = await handle.createWritable();
-          const response = await fetch(imgData);
-          const blob = await response.blob();
-          await writable.write(blob);
-          await writable.close();
-          return true;
-        } catch (err) {
-          if (err.name === 'AbortError') return false;
-          throw err;
-        }
-      }
+  }).then(canvas => {
+    console.log("Canvas erstellt, Download wird gestartet");
+    // Element wieder verstecken
+    certificateElement.style.display = "none";
+    certificateElement.style.position = "absolute";
+    certificateElement.style.top = "-9999px";
+    certificateElement.style.left = "-9999px";
 
-      // Fallback: Klassischer Download
-      const link = document.createElement('a');
-      link.href = imgData;
-      link.download = 'mein-shop-design.png';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      return true;
-    } catch (e) {
-      console.error('Export Fehler:', e);
-      return true;
-    }
-  }).catch(err => {
-    console.error('html2canvas Fehler:', err);
-    return true;
+    // Canvas zu Data URL konvertieren und herunterladen
+    const dataUrl = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = `Zertifikat_E-Commerce_${playerName.replace(/\s+/g, "_")}.png`;
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    console.log("Download gestartet");
+  }).catch(error => {
+    console.error("Fehler beim Erstellen des Zertifikats:", error);
+    certificateElement.style.display = "none";
+    certificateElement.style.position = "absolute";
+    certificateElement.style.top = "-9999px";
+    certificateElement.style.left = "-9999px";
   });
 }
 
