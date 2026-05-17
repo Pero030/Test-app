@@ -81,6 +81,11 @@
                 document.body.style.zoom = 1;
                 document.documentElement.style.zoom = 1;
             }, 100);
+
+            // Prüfen, ob Nutzungsbedingungen bestätigt wurden
+            if (!localStorage.getItem('cookieConsentAccepted')) {
+                window.location.href = '../index.html';
+            }
         </script>
     </head>
     <body>
