@@ -2,11 +2,61 @@
 <html lang="de">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=1400, initial-scale=1.0" />
+        <meta name="viewport" content="width=1400, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimum-scale=1.0" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="width" />
+        <meta name="format-detection" content="telephone=no" />
         <title>Büromanagement - ALO Academy</title>
         <link rel="stylesheet" href="../assets/css/style.css" />
         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
         <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        <script>
+            // Zoomen vollständig verhindern
+            document.addEventListener(
+                "gesturestart",
+                function (e) {
+                    e.preventDefault();
+                },
+                { passive: false },
+            );
+            document.addEventListener(
+                "gesturechange",
+                function (e) {
+                    e.preventDefault();
+                },
+                { passive: false },
+            );
+            document.addEventListener(
+                "gestureend",
+                function (e) {
+                    e.preventDefault();
+                },
+                { passive: false },
+            );
+            document.addEventListener(
+                "touchstart",
+                function (e) {
+                    if (e.touches.length > 1) {
+                        e.preventDefault();
+                    }
+                },
+                { passive: false },
+            );
+            document.addEventListener(
+                "touchmove",
+                function (e) {
+                    if (e.touches.length > 1) {
+                        e.preventDefault();
+                    }
+                },
+                { passive: false },
+            );
+
+            // Prüfen, ob Nutzungsbedingungen bestätigt wurden
+            if (!localStorage.getItem('cookieConsentAccepted')) {
+                window.location.href = '../index.html';
+            }
+        </script>
     </head>
     <body>
         <!-- Start Screen -->
