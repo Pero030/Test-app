@@ -145,10 +145,11 @@ function generateCertificate() {
   if (shopPreviewElement) {
     // Klon der Shop-Vorschau erstellen
     const previewClone = preview.cloneNode(true);
-    previewClone.style.transform = "scale(0.5)";
-    previewClone.style.transformOrigin = "top left";
-    previewClone.style.width = "200%";
+    previewClone.style.transform = "scale(0.4)";
+    previewClone.style.transformOrigin = "top center";
+    previewClone.style.width = "250%";
     previewClone.style.height = "auto";
+    previewClone.style.margin = "0 auto";
     shopPreviewElement.innerHTML = "";
     shopPreviewElement.appendChild(previewClone);
   }
