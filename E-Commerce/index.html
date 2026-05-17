@@ -82,10 +82,12 @@
                 document.documentElement.style.zoom = 1;
             }, 100);
 
-            // Prüfen, ob Nutzungsbedingungen bestätigt wurden
-            if (!localStorage.getItem('cookieConsentAccepted')) {
-                window.location.href = '../index.html';
-            }
+            // Prüfen, ob Nutzungsbedingungen bestätigt wurden (nach DOMContentLoaded)
+            document.addEventListener('DOMContentLoaded', function() {
+                if (!localStorage.getItem('cookieConsentAccepted')) {
+                    window.location.href = '../index.html';
+                }
+            });
         </script>
     </head>
     <body>

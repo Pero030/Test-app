@@ -51,11 +51,36 @@
                 },
                 { passive: false },
             );
+            document.addEventListener(
+                "wheel",
+                function (e) {
+                    if (e.ctrlKey) {
+                        e.preventDefault();
+                    }
+                },
+                { passive: false },
+            );
+            document.addEventListener("keydown", function (e) {
+                if (
+                    (e.ctrlKey || e.metaKey) &&
+                    (e.key === "+" || e.key === "-" || e.key === "0")
+                ) {
+                    e.preventDefault();
+                }
+            });
 
-            // Prüfen, ob Nutzungsbedingungen bestätigt wurden
-            if (!localStorage.getItem('cookieConsentAccepted')) {
-                window.location.href = '../index.html';
-            }
+            // Zoom-Level überwachen und zurücksetzen
+            setInterval(function () {
+                document.body.style.zoom = 1;
+                document.documentElement.style.zoom = 1;
+            }, 100);
+
+            // Prüfen, ob Nutzungsbedingungen bestätigt wurden (nach DOMContentLoaded)
+            document.addEventListener('DOMContentLoaded', function() {
+                if (!localStorage.getItem('cookieConsentAccepted')) {
+                    window.location.href = '../index.html';
+                }
+            });
         </script>
     </head>
     <body>

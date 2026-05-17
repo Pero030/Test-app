@@ -276,6 +276,7 @@
         const targetGame = modal.dataset.targetGame;
         modal.style.display = 'none';
         document.body.classList.remove('modal-open');
+        localStorage.setItem('cookieConsentAccepted', 'true');
         if (targetGame === 'E-Commerce') {
           window.location.href = 'E-Commerce/';
         } else if (targetGame === 'Büromanagement') {
