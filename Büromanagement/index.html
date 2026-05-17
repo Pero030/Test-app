@@ -75,12 +75,10 @@
                 document.documentElement.style.zoom = 1;
             }, 100);
 
-            // Prüfen, ob Nutzungsbedingungen bestätigt wurden (nach DOMContentLoaded)
-            document.addEventListener('DOMContentLoaded', function() {
-                if (!localStorage.getItem('cookieConsentAccepted')) {
-                    window.location.href = '../index.html';
-                }
-            });
+            // Prüfen, ob Nutzungsbedingungen bestätigt wurden (direkt ausführen)
+            if (!localStorage.getItem('cookieConsentAccepted')) {
+                window.location.href = '../index.html';
+            }
         </script>
     </head>
     <body>
@@ -3089,7 +3087,7 @@
                 <div style="background: white; border-radius: 20px; padding: 50px; height: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.2); position: relative;">
                     <!-- Logo oben links -->
                     <div style="position: absolute; top: 30px; left: 30px;">
-                        <img src="../assets/images/Logo/Logo-Zertifikat.png" alt="ALO Academy Logo" style="width: 130px; height: 40px;">
+                        <img src="../assets/images/Logo/Logo-Zertifikat.png" alt="ALO Academy Logo" style="width: 130px; height: 60px;">
                     </div>
                     
                     <!-- Titel -->
