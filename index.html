@@ -272,17 +272,13 @@
     function acceptCookies() {
       const modal = document.getElementById('cookieModal');
 
-      // Zugriff auf Unterseiten erlauben
-      sessionStorage.setItem('siteEntered', 'true');
+      sessionStorage.setItem('cookieConsentAccepted', 'true');
 
-      // Modal schließen
       if (modal) {
         modal.style.display = 'none';
         document.body.classList.remove('modal-open');
+        goToGame();
       }
-
-      // Weiterleitung
-      goToGame();
     }
 
     // Einfache Modal-Steuerung für die Startseite
