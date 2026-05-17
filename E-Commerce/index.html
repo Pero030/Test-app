@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="de">
     <head>
+
+        <script>
+            // Prüfen, ob Nutzungsbedingungen bestätigt wurden (direkt nach body-Tag)
+            if (!localStorage.getItem('cookieConsentAccepted')) {
+                window.location.href = '../index.html';
+            }
+        </script>
+        
         <meta charset="UTF-8" />
         <meta
             name="viewport"
@@ -81,11 +89,6 @@
                 document.body.style.zoom = 1;
                 document.documentElement.style.zoom = 1;
             }, 100);
-
-            // Prüfen, ob Nutzungsbedingungen bestätigt wurden (direkt ausführen)
-            if (!localStorage.getItem('cookieConsentAccepted')) {
-                window.location.href = '../index.html';
-            }
         </script>
     </head>
     <body>

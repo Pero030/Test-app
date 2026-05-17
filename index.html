@@ -142,10 +142,10 @@
       </div>
       <script>
         function goToECommerce() {
-          initCookieConsent('E-Commerce');
+          window.location.href = 'E-Commerce/';
         }
         function goToBurokaufmann() {
-          initCookieConsent('Büromanagement');
+          window.location.href = 'Büromanagement/';
         }
       </script>
       <div style="margin-top: 40px; display: flex; gap: 30px; justify-content: center; opacity: 0.6; font-size: 14px;">
@@ -242,7 +242,7 @@
     }, 100);
 
     // Cookie Consent Logik für die Startseite
-    function initCookieConsent(targetGame) {
+    function initCookieConsent() {
       const modal = document.getElementById('cookieModal');
       const checkbox = document.getElementById('cookieAgree');
       const btn = document.getElementById('cookieAcceptBtn');
@@ -250,7 +250,6 @@
       if (modal) {
         modal.style.display = 'flex';
         document.body.classList.add('modal-open');
-        modal.dataset.targetGame = targetGame;
       }
 
       if (checkbox && btn) {
@@ -272,17 +271,18 @@
 
     function acceptCookies() {
       const modal = document.getElementById('cookieModal');
+
+      // Zugriff auf Unterseiten erlauben
+      sessionStorage.setItem('siteEntered', 'true');
+
+      // Modal schließen
       if (modal) {
-        const targetGame = modal.dataset.targetGame;
         modal.style.display = 'none';
         document.body.classList.remove('modal-open');
-        localStorage.setItem('cookieConsentAccepted', 'true');
-        if (targetGame === 'E-Commerce') {
-          window.location.href = 'E-Commerce/';
-        } else if (targetGame === 'Büromanagement') {
-          window.location.href = 'Büromanagement/';
-        }
       }
+
+      // Weiterleitung
+      goToGame();
     }
 
     // Einfache Modal-Steuerung für die Startseite
