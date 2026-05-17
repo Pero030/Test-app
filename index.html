@@ -142,10 +142,10 @@
       </div>
       <script>
         function goToECommerce() {
-          window.location.href = 'E-Commerce/';
+          initCookieConsent('E-Commerce');
         }
         function goToBurokaufmann() {
-          window.location.href = 'Büromanagement/';
+          initCookieConsent('Büromanagement');
         }
       </script>
       <div style="margin-top: 40px; display: flex; gap: 30px; justify-content: center; opacity: 0.6; font-size: 14px;">
@@ -242,7 +242,7 @@
     }, 100);
 
     // Cookie Consent Logik für die Startseite
-    function initCookieConsent() {
+    function initCookieConsent(targetGame) {
       const modal = document.getElementById('cookieModal');
       const checkbox = document.getElementById('cookieAgree');
       const btn = document.getElementById('cookieAcceptBtn');
@@ -250,6 +250,7 @@
       if (modal) {
         modal.style.display = 'flex';
         document.body.classList.add('modal-open');
+        modal.dataset.targetGame = targetGame;
       }
 
       if (checkbox && btn) {
@@ -271,16 +272,11 @@
 
     function acceptCookies() {
       const modal = document.getElementById('cookieModal');
-
       if (modal) {
         const targetGame = modal.dataset.targetGame;
-
         modal.style.display = 'none';
         document.body.classList.remove('modal-open');
-
-        // NUR für aktuelle Sitzung
-        sessionStorage.setItem('cookieConsentAccepted', 'true');
-
+        localStorage.setItem('cookieConsentAccepted', 'true');
         if (targetGame === 'E-Commerce') {
           window.location.href = 'E-Commerce/';
         } else if (targetGame === 'Büromanagement') {
