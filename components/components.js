@@ -1,15 +1,32 @@
+import {
+    db,
+    collection,
+    getDocs,
+    query
+} from "../assets/js/firebase.js";
+
 (function () {
+
   const infoStorageKey = "aloAcademyInfos";
   const infoReadStorageKey = "aloAcademyReadInfos";
   const settingsPin = "080918";
 
-  function getInfos() {
-    try {
-      const infos = JSON.parse(localStorage.getItem(infoStorageKey) || "[]");
-      return Array.isArray(infos) ? infos : [];
-    } catch (error) {
-      return [];
-    }
+  async function getInfos() {
+
+    const q = query(collection(db, "infos"));
+
+    const snapshot = await getDocs(q);
+
+    const infos = [];
+
+    snapshot.forEach((docItem) => {
+      infos.push({
+        firebaseId: docItem.id,
+        ...docItem.data()
+      });
+    });
+
+    return infos.reverse();
   }
 
   function getInfoId(info) {
@@ -58,17 +75,18 @@
     openInfoBell();
   }
 
-  function markAllInfosRead() {
-    const allIds = getInfos().map(getInfoId);
+  async function markAllInfosRead() {
+    const infos = await getInfos();
+    const allIds = infos.map(getInfoId);
     setReadInfoIds(Array.from(new Set([].concat(getReadInfoIds(), allIds))));
     updateInfoBadge();
     openInfoBell();
   }
 
-  function openInfoBell() {
+  async function openInfoBell() {
     closeInfoBell();
 
-    const infos = getInfos();
+    const infos = await getInfos();
     const readIds = getReadInfoIds();
     const unreadCount = infos.filter(function (info) {
       return !readIds.includes(getInfoId(info));
@@ -198,9 +216,10 @@
     }
   }
 
-  function updateInfoBadge() {
+  async function updateInfoBadge() {
     const readIds = getReadInfoIds();
-    const count = getInfos().filter(function (info) {
+    const infos = await getInfos();
+    const count = infos.filter(function (info) {
       return !readIds.includes(getInfoId(info));
     }).length;
 
