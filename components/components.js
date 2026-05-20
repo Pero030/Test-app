@@ -72,7 +72,6 @@ import {
     }
 
     updateInfoBadge();
-    openInfoBell();
   }
 
   async function markAllInfosRead() {
@@ -80,7 +79,6 @@ import {
     const allIds = infos.map(getInfoId);
     setReadInfoIds(Array.from(new Set([].concat(getReadInfoIds(), allIds))));
     updateInfoBadge();
-    openInfoBell();
   }
 
   async function openInfoBell() {
