@@ -170,10 +170,21 @@
       }
     }
 
-    function clearInfos() {
+    async function clearInfos() {
+
       if (!confirm("Alle Infos löschen?")) return;
-      setInfos([]);
-      renderInfos();
+
+      const infos = await getInfos();
+
+      for (const info of infos) {
+        await deleteDoc(doc(db, "infos", info.firebaseId));
+      }
+
+      await renderInfos();
+
+      if (typeof updateInfoBadge === "function") {
+        updateInfoBadge();
+      }
     }
 
     function unlockSettingsPage() {
