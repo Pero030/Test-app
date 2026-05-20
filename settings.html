@@ -66,6 +66,7 @@
       getDocs,
       deleteDoc,
       doc,
+      getDoc,
       orderBy,
       query
     } from "./assets/js/firebase.js";
@@ -73,7 +74,6 @@
   
   
     const infoStorageKey = "aloAcademyInfos";
-    const settingsPin = "080918";
 
     async function getInfos() {
 
@@ -91,6 +91,19 @@
       });
 
       return infos.reverse();
+    }
+
+    async function getSettingsPin() {
+
+      const settingsRef = doc(db, "settings", "security");
+
+      const snapshot = await getDoc(settingsRef);
+
+      if (!snapshot.exists()) {
+        return null;
+      }
+
+      return snapshot.data().settingsPin;
     }
 
     function escapeHtml(value) {
@@ -187,9 +200,11 @@
       }
     }
 
-    function unlockSettingsPage() {
+    async function unlockSettingsPage() {
       const input = document.getElementById("settingsPinInput");
       const error = document.getElementById("settingsPinError");
+
+      const settingsPin = await getSettingsPin();
 
       if (input.value === settingsPin) {
         sessionStorage.setItem("aloAcademySettingsUnlocked", "true");
