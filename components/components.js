@@ -64,17 +64,76 @@
     document.body.classList.add("modal-open");
   }
 
-  function openSettingsPin(basePath) {
-    const pin = window.prompt("PIN für Einstellungen eingeben:");
-    if (pin === null) return;
+  function closeSettingsPinModal() {
+    const modal = document.getElementById("settingsPinModal");
+    if (modal) modal.remove();
+    document.body.classList.remove("modal-open");
+  }
 
-    if (pin === settingsPin) {
+  function submitSettingsPin() {
+    const modal = document.getElementById("settingsPinModal");
+    if (!modal) return;
+
+    const input = document.getElementById("settingsHeaderPinInput");
+    const errorMessage = document.getElementById("settingsPinErrorMessage");
+    const basePath = modal.dataset.basePath || ".";
+
+    if (input && input.value === settingsPin) {
+      closeSettingsPinModal();
       sessionStorage.setItem("aloAcademySettingsUnlocked", "true");
-      window.location.href = (basePath || ".") + "/settings.html";
+      window.location.href = basePath + "/settings.html";
       return;
     }
 
-    alert("Falscher PIN.");
+    if (errorMessage) errorMessage.style.display = "block";
+    if (input) {
+      input.value = "";
+      input.focus();
+    }
+  }
+
+  function openSettingsPin(basePath) {
+    closeSettingsPinModal();
+
+    const modal = document.createElement("div");
+    modal.id = "settingsPinModal";
+    modal.className = "modal-overlay";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-labelledby", "settingsPinTitle");
+    modal.dataset.basePath = basePath || ".";
+    modal.style.display = "flex";
+    modal.style.zIndex = "100000";
+
+    modal.innerHTML =
+      '<div class="modal" style="max-width: 500px; width: 90%; max-height: 85vh; text-align: center;">' +
+        '<div class="modal-content-scroll" style="padding: 50px">' +
+          '<h3 id="settingsPinTitle" style="font-size: 28px; color: #a855f7; margin-bottom: 25px;">⚙️ Einstellungen</h3>' +
+          '<p style="color: #ffffff; line-height: 1.8; font-size: 18px; margin-bottom: 25px;">Bitte gib die PIN ein, um die Einstellungen zu öffnen:</p>' +
+          '<input type="password" id="settingsHeaderPinInput" placeholder="PIN eingeben" style="width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #a855f7; background: rgba(168, 85, 247, 0.1); color: #ffffff; font-size: 18px; text-align: center; margin-bottom: 25px; outline: none;" />' +
+          '<div id="settingsPinErrorMessage" style="color: #ef4444; font-size: 16px; margin-bottom: 20px; display: none;">Falsche PIN!</div>' +
+          '<div style="display: flex; gap: 20px; justify-content: center;">' +
+            '<button class="modal-btn" onclick="submitSettingsPin()" style="background: #a855f7; color: white">Bestätigen</button>' +
+            '<button class="modal-btn" onclick="closeSettingsPinModal()" style="background: #ef4444; color: white">Abbrechen</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    modal.onclick = function (event) {
+      if (event.target === modal) closeSettingsPinModal();
+    };
+
+    document.body.appendChild(modal);
+    document.body.classList.add("modal-open");
+
+    const input = document.getElementById("settingsHeaderPinInput");
+    if (input) {
+      input.focus();
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") submitSettingsPin();
+        if (event.key === "Escape") closeSettingsPinModal();
+      });
+    }
   }
 
   function updateInfoBadge() {
@@ -122,6 +181,8 @@
   window.openInfoBell = openInfoBell;
   window.closeInfoBell = closeInfoBell;
   window.openSettingsPin = openSettingsPin;
+  window.submitSettingsPin = submitSettingsPin;
+  window.closeSettingsPinModal = closeSettingsPinModal;
   window.updateInfoBadge = updateInfoBadge;
   window.aloAcademyInfoStorageKey = infoStorageKey;
 
