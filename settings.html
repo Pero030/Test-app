@@ -116,6 +116,7 @@
 
       const infos = getInfos();
       infos.unshift({
+        id: "info-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8),
         title: title,
         text: text,
         date: new Date().toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" })
