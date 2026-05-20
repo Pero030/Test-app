@@ -201,10 +201,13 @@
     }
 
     async function unlockSettingsPage() {
-      const input = document.getElementById("settingsPinInput");
-      const error = document.getElementById("settingsPinError");
 
       const settingsPin = await getSettingsPin();
+
+      console.log(settingsPin);
+
+      const input = document.getElementById("settingsPinInput");
+      const error = document.getElementById("settingsPinError");
 
       if (input.value === settingsPin) {
         sessionStorage.setItem("aloAcademySettingsUnlocked", "true");
