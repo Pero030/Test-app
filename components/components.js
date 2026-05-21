@@ -4,7 +4,8 @@ import {
     getDocs,
     query,
     doc,
-    getDoc
+    getDoc,
+    deleteDoc
 } from "../assets/js/firebase.js";
 
 (function () {
@@ -63,7 +64,7 @@ import {
     document.body.classList.remove("modal-open");
   }
 
-  async function markInfoRead(encodedId) {
+  function markInfoRead(encodedId, button) {
 
     const id =
         decodeURIComponent(encodedId);
@@ -80,7 +81,22 @@ import {
 
     updateInfoBadge();
 
-    await openInfoBell();
+    if (button) {
+
+        button.outerHTML =
+          '<span style="background: rgba(34,197,94,0.16); color: #86efac; border: 1px solid rgba(34,197,94,0.35); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 800;">Gelesen</span>';
+    }
+  }
+
+  async function deleteSingleInfo(firebaseId) {
+
+    await deleteDoc(
+        doc(db, "infos", firebaseId)
+    );
+
+    updateInfoBadge();
+
+    openInfoBell();
   }
 
   async function markAllInfosRead() {
@@ -108,24 +124,58 @@ import {
     };
 
     const infoItems = infos.length
-      ? infos
-          .map(function (info) {
-            const id = getInfoId(info);
-            const isRead = readIds.includes(id);
-            const readControl = isRead
-              ? '<span style="background: rgba(34,197,94,0.16); color: #86efac; border: 1px solid rgba(34,197,94,0.35); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 800;">Gelesen</span>'
-              : '<button onclick="markInfoRead(\'' + encodeURIComponent(id) + '\')" style="background: #22c55e; color: white; padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 800; border: none; cursor: pointer;">Gelesen</button>';
 
-            return '<div style="text-align: left; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; padding: 22px; margin-bottom: 16px;">' +
-              '<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 10px;">' +
-                '<h4 style="color: #38bdf8; font-size: 22px; margin: 0;">' + escapeHtml(info.title) + '</h4>' +
-                readControl +
-              '</div>' +
-              '<p style="color: rgba(255,255,255,0.86); font-size: 17px; line-height: 1.7; margin: 0; white-space: pre-wrap;">' + escapeHtml(info.text) + '</p>' +
-              (info.date ? '<p style="color: rgba(255,255,255,0.45); font-size: 12px; margin: 14px 0 0 0;">' + escapeHtml(info.date) + '</p>' : '') +
-            '</div>';
-          })
-          .join("")
+      ? infos.map(function (info) {
+
+          const id = getInfoId(info);
+
+          const isRead =
+              readIds.includes(id);
+
+          const readControl = isRead
+
+            ? '<div style="display:flex; gap:10px; align-items:center;">' +
+
+                '<span style="background: rgba(34,197,94,0.16); color: #86efac; border: 1px solid rgba(34,197,94,0.35); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 800;">Gelesen</span>' +
+
+                '<button onclick="deleteSingleInfo(\'' + info.firebaseId + '\')" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
+
+              '</div>'
+
+            : '<div style="display:flex; gap:10px; align-items:center;">' +
+
+                '<button onclick="markInfoRead(\'' + encodeURIComponent(id) + '\', this)" style="background:#22c55e; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Gelesen</button>' +
+
+                '<button onclick="deleteSingleInfo(\'' + info.firebaseId + '\')" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
+
+              '</div>';
+
+          return '<div style="text-align:left; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:18px; padding:22px; margin-bottom:16px;">' +
+
+            '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:18px; margin-bottom:10px;">' +
+
+              '<h4 style="color:#38bdf8; font-size:22px; margin:0;">' +
+                escapeHtml(info.title) +
+              '</h4>' +
+
+              readControl +
+
+            '</div>' +
+
+            '<p style="color:rgba(255,255,255,0.86); font-size:17px; line-height:1.7; margin:0; white-space:pre-wrap;">' +
+              escapeHtml(info.text) +
+            '</p>' +
+
+            (info.date
+              ? '<p style="color:rgba(255,255,255,0.45); font-size:12px; margin:14px 0 0 0;">' +
+                  escapeHtml(info.date) +
+                '</p>'
+              : '') +
+
+          '</div>';
+
+        }).join("")
+
       : '<p style="color: rgba(255,255,255,0.75); font-size: 20px;">Aktuell gibt es keine Infos.</p>';
 
     const allReadButton = infos.length && unreadCount > 0
