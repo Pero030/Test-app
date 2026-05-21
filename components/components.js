@@ -154,13 +154,7 @@ import {
     const infoItems = visibleInfos.length
 
       ? visibleInfos
-          .filter(function(info) {
-
-              return !hiddenInfos.includes(
-                  getInfoId(info)
-              );
-
-          })
+      
           .map(function (info) {
 
           const id = getInfoId(info);
