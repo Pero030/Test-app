@@ -9,7 +9,6 @@ import {
 
 (function () {
 
-  const infoStorageKey = "aloAcademyInfos";
   const infoReadStorageKey = "aloAcademyReadInfos";
 
   async function getInfos() {
@@ -82,12 +81,20 @@ import {
 
     if (button) {
 
+      const card =
+          button.closest(".info-card");
+
+      if (card) {
+
+          card.dataset.read = "true";
+      }
+
         button.outerHTML =
           '<span style="background: rgba(34,197,94,0.16); color: #86efac; border: 1px solid rgba(34,197,94,0.35); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 800;">Gelesen</span>';
     }
   }
 
-  function deleteSingleInfo(infoId) {
+  function deleteSingleInfo(infoId, button) {
 
     const hiddenInfos =
         JSON.parse(
@@ -106,7 +113,34 @@ import {
         );
     }
 
-    openInfoBell();
+    updateInfoBadge();
+
+    const card =
+        button.closest(
+            ".info-card"
+        );
+
+    if (card) {
+
+        card.remove();
+    }
+
+    const remainingCards =
+        document.querySelectorAll(
+            '.info-card[data-read="false"]'
+        );
+
+    const unreadLabel =
+        document.querySelector(
+            "#infoBellOverlay .unread-count"
+        );
+
+    if (unreadLabel) {
+
+        unreadLabel.textContent =
+            remainingCards.length +
+            " ungelesen";
+    }
   }
 
   async function markAllInfosRead() {
@@ -154,7 +188,7 @@ import {
     const infoItems = visibleInfos.length
 
       ? visibleInfos
-      
+
           .map(function (info) {
 
           const id = getInfoId(info);
@@ -168,7 +202,7 @@ import {
 
                 '<span style="background: rgba(34,197,94,0.16); color: #86efac; border: 1px solid rgba(34,197,94,0.35); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 800;">Gelesen</span>' +
 
-                '<button onclick="deleteSingleInfo(\'' + id + '\')" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
+                '<button onclick="deleteSingleInfo(\'' + id + '\', this)" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
 
               '</div>'
 
@@ -176,11 +210,11 @@ import {
 
                 '<button onclick="markInfoRead(\'' + encodeURIComponent(id) + '\', this)" style="background:#22c55e; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Gelesen</button>' +
 
-                '<button onclick="deleteSingleInfo(\'' + id + '\')" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
+                '<button onclick="deleteSingleInfo(\'' + id + '\', this)" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
 
               '</div>';
 
-          return '<div style="text-align:left; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:18px; padding:22px; margin-bottom:16px;">' +
+          return '<div class="info-card" data-read="' + isRead + '"  style="text-align:left; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:18px; padding:22px; margin-bottom:16px;">' +
 
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:18px; margin-bottom:10px;">' +
 
@@ -217,7 +251,7 @@ import {
         '<div class="modal-content-scroll" style="padding: 50px;">' +
           '<div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 18px;">' +
             '<h3 style="margin-bottom: 0;">Infos</h3>' +
-            '<span style="color: rgba(255,255,255,0.65); font-size: 14px; font-weight: 800;">' + unreadCount + ' ungelesen</span>' +
+            '<span class="unread-count" style="color: rgba(255,255,255,0.65); font-size: 14px; font-weight: 800;">' + unreadCount + ' ungelesen</span>' +
           '</div>' +
           '<div style="max-height: 52vh; overflow-y: auto; padding-right: 6px;">' + infoItems + '</div>' +
           '<div style="text-align: center;">' +
