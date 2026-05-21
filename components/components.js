@@ -410,6 +410,7 @@ import {
   window.closeSettingsPinModal = closeSettingsPinModal;
   window.updateInfoBadge = updateInfoBadge;
   window.aloAcademyInfoStorageKey = infoStorageKey;
+  window.deleteSingleInfo = deleteSingleInfo;
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", loadComponents);
