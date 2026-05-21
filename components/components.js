@@ -129,7 +129,7 @@ import {
         document.querySelectorAll(
             '.info-card[data-read="false"]'
         );
-        
+
     const unreadCount =
         unreadCards.length;
 
@@ -446,7 +446,6 @@ import {
   window.submitSettingsPin = submitSettingsPin;
   window.closeSettingsPinModal = closeSettingsPinModal;
   window.updateInfoBadge = updateInfoBadge;
-  window.aloAcademyInfoStorageKey = infoStorageKey;
   window.deleteSingleInfo = deleteSingleInfo;
 
   if (document.readyState === "loading") {
