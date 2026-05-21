@@ -147,25 +147,66 @@ import {
     document.body.classList.remove("modal-open");
   }
 
-  function submitSettingsPin() {
-    const modal = document.getElementById("settingsPinModal");
-    if (!modal) return;
+  async function submitSettingsPin() {
 
-    const input = document.getElementById("settingsHeaderPinInput");
-    const errorMessage = document.getElementById("settingsPinErrorMessage");
-    const basePath = modal.dataset.basePath || ".";
+    const input =
+        document.getElementById(
+            "settingsPinInput"
+        );
 
-    if (input && input.value === settingsPin) {
-      closeSettingsPinModal();
-      sessionStorage.setItem("aloAcademySettingsUnlocked", "true");
-      window.location.href = basePath + "/settings.html";
-      return;
+    const errorMessage =
+        document.getElementById(
+            "settingsPinError"
+        );
+
+    const pin =
+        input.value.trim();
+
+    const settingsRef =
+        doc(
+            db,
+            "settings",
+            "security"
+        );
+
+    const snapshot =
+        await getDoc(settingsRef);
+
+    if (!snapshot.exists()) {
+        console.log(
+            "Kein settings Dokument gefunden"
+        );
+        return;
     }
 
-    if (errorMessage) errorMessage.style.display = "block";
-    if (input) {
-      input.value = "";
-      input.focus();
+    const settingsPin =
+        snapshot.data().settingsPin;
+
+    console.log(
+        "Firebase PIN:",
+        settingsPin
+    );
+
+    console.log(
+        "Eingegebene PIN:",
+        pin
+    );
+
+    if (pin === settingsPin) {
+
+        window.location.href =
+            "settings.html";
+
+    } else {
+
+        if (errorMessage) {
+            errorMessage.style.display =
+                "block";
+        }
+
+        input.value = "";
+
+        input.focus();
     }
   }
 
