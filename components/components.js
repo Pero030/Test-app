@@ -127,8 +127,20 @@ import {
               "aloAcademyHiddenInfos"
           ) || "[]"
       );
-    const unreadCount = infos.filter(function (info) {
-      return !readIds.includes(getInfoId(info));
+    const visibleInfos = infos.filter(function(info) {
+
+    return !hiddenInfos.includes(
+        getInfoId(info)
+    );
+
+});
+
+    const unreadCount = visibleInfos.filter(function (info) {
+
+        return !readIds.includes(
+            getInfoId(info)
+        );
+
     }).length;
     const overlay = document.createElement("div");
     overlay.id = "infoBellOverlay";
@@ -139,9 +151,9 @@ import {
       if (event.target === overlay) closeInfoBell();
     };
 
-    const infoItems = infos.length
+    const infoItems = visibleInfos.length
 
-      ? infos
+      ? visibleInfos
           .filter(function(info) {
 
               return !hiddenInfos.includes(
@@ -316,21 +328,54 @@ import {
   }
 
   async function updateInfoBadge() {
-    const readIds = getReadInfoIds();
-    const infos = await getInfos();
+
+    const readIds =
+        getReadInfoIds();
+
+    const infos =
+        await getInfos();
+
+    const hiddenInfos =
+        JSON.parse(
+            localStorage.getItem(
+                "aloAcademyHiddenInfos"
+            ) || "[]"
+        );
+
     const count = infos.filter(function (info) {
-      return !readIds.includes(getInfoId(info));
+
+        const id =
+            getInfoId(info);
+
+        return (
+            !readIds.includes(id) &&
+            !hiddenInfos.includes(id)
+        );
+
     }).length;
 
-    document.querySelectorAll("[data-info-count]").forEach(function (badge) {
-      if (count > 0) {
-        badge.textContent = String(count);
-        badge.style.display = "inline-block";
-      } else {
-        badge.textContent = "";
-        badge.style.display = "none";
-      }
-    });
+    document
+        .querySelectorAll(
+            "[data-info-count]"
+        )
+        .forEach(function (badge) {
+
+            if (count > 0) {
+
+                badge.textContent =
+                    String(count);
+
+                badge.style.display =
+                    "inline-block";
+
+            } else {
+
+                badge.textContent = "";
+
+                badge.style.display =
+                    "none";
+            }
+        });
   }
 
   async function loadComponent(mount) {
