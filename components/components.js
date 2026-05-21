@@ -125,10 +125,13 @@ import {
         card.remove();
     }
 
-    const remainingCards =
+    const unreadCards =
         document.querySelectorAll(
             '.info-card[data-read="false"]'
         );
+        
+    const unreadCount =
+        unreadCards.length;
 
     const unreadLabel =
         document.querySelector(
@@ -138,7 +141,7 @@ import {
     if (unreadLabel) {
 
         unreadLabel.textContent =
-            remainingCards.length +
+            unreadCount +
             " ungelesen";
     }
   }
