@@ -156,11 +156,6 @@ import {
             "settingsHeaderPinInput"
         );
 
-    const errorMessage =
-        document.getElementById(
-            "settingsPinError"
-        );
-
     const pin =
         input.value.trim();
 
@@ -174,41 +169,23 @@ import {
     const snapshot =
         await getDoc(settingsRef);
 
-    if (!snapshot.exists()) {
-        console.log(
-            "Kein settings Dokument gefunden"
-        );
-        return;
-    }
-
     const settingsPin =
         snapshot.data().settingsPin;
 
-    console.log(
-        "Firebase PIN:",
-        settingsPin
-    );
-
-    console.log(
-        "Eingegebene PIN:",
-        pin
-    );
-
     if (pin === settingsPin) {
 
+        sessionStorage.setItem(
+            "aloAcademySettingsUnlocked",
+            "true"
+        );
+
         window.location.href =
-            "settings.html";
+            "./settings.html";
 
     } else {
 
-        if (errorMessage) {
-            errorMessage.style.display =
-                "block";
-        }
+        alert("Falscher PIN");
 
-        input.value = "";
-
-        input.focus();
     }
   }
 
