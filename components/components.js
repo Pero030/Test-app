@@ -4,8 +4,7 @@ import {
     getDocs,
     query,
     doc,
-    getDoc,
-    deleteDoc
+    getDoc
 } from "../assets/js/firebase.js";
 
 (function () {
@@ -88,13 +87,24 @@ import {
     }
   }
 
-  async function deleteSingleInfo(firebaseId) {
+  function deleteSingleInfo(infoId) {
 
-    await deleteDoc(
-        doc(db, "infos", firebaseId)
-    );
+    const hiddenInfos =
+        JSON.parse(
+            localStorage.getItem(
+                "aloAcademyHiddenInfos"
+            ) || "[]"
+        );
 
-    updateInfoBadge();
+    if (!hiddenInfos.includes(infoId)) {
+
+        hiddenInfos.push(infoId);
+
+        localStorage.setItem(
+            "aloAcademyHiddenInfos",
+            JSON.stringify(hiddenInfos)
+        );
+    }
 
     openInfoBell();
   }
@@ -111,6 +121,12 @@ import {
 
     const infos = await getInfos();
     const readIds = getReadInfoIds();
+    const hiddenInfos =
+      JSON.parse(
+          localStorage.getItem(
+              "aloAcademyHiddenInfos"
+          ) || "[]"
+      );
     const unreadCount = infos.filter(function (info) {
       return !readIds.includes(getInfoId(info));
     }).length;
@@ -125,7 +141,15 @@ import {
 
     const infoItems = infos.length
 
-      ? infos.map(function (info) {
+      ? infos
+          .filter(function(info) {
+
+              return !hiddenInfos.includes(
+                  getInfoId(info)
+              );
+
+          })
+          .map(function (info) {
 
           const id = getInfoId(info);
 
@@ -138,7 +162,7 @@ import {
 
                 '<span style="background: rgba(34,197,94,0.16); color: #86efac; border: 1px solid rgba(34,197,94,0.35); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 800;">Gelesen</span>' +
 
-                '<button onclick="deleteSingleInfo(\'' + info.firebaseId + '\')" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
+                '<button onclick="deleteSingleInfo(\'' + id + '\')" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
 
               '</div>'
 
@@ -146,7 +170,7 @@ import {
 
                 '<button onclick="markInfoRead(\'' + encodeURIComponent(id) + '\', this)" style="background:#22c55e; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Gelesen</button>' +
 
-                '<button onclick="deleteSingleInfo(\'' + info.firebaseId + '\')" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
+                '<button onclick="deleteSingleInfo(\'' + id + '\')" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
 
               '</div>';
 
