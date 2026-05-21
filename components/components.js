@@ -151,7 +151,7 @@ import {
 
     const input =
         document.getElementById(
-            "settingsPinInput"
+            "settingsHeaderPinInput"
         );
 
     const errorMessage =
