@@ -2,7 +2,9 @@ import {
     db,
     collection,
     getDocs,
-    query
+    query,
+    doc,
+    getDoc
 } from "../assets/js/firebase.js";
 
 (function () {
