@@ -63,16 +63,24 @@ import {
     document.body.classList.remove("modal-open");
   }
 
-  function markInfoRead(encodedId) {
-    const id = decodeURIComponent(encodedId);
-    const readIds = getReadInfoIds();
+  async function markInfoRead(encodedId) {
+
+    const id =
+        decodeURIComponent(encodedId);
+
+    const readIds =
+        getReadInfoIds();
 
     if (!readIds.includes(id)) {
-      readIds.push(id);
-      setReadInfoIds(readIds);
+
+        readIds.push(id);
+
+        setReadInfoIds(readIds);
     }
 
     updateInfoBadge();
+
+    await openInfoBell();
   }
 
   async function markAllInfosRead() {
