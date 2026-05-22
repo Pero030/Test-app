@@ -70,18 +70,23 @@ async function checkMaintenance() {
 function showMaintenance(data) {
 
     const main =
-            document.querySelector(
-                "main"
-            );
+        document.querySelector(
+            "main"
+        );
 
-        if (main) {
+    if (main) {
 
-            main.style.display =
-                "none";
-        }
+        main.style.display =
+            "none";
+    }
 
     const maintenance =
-        document.createElement("div");
+    document.createElement(
+        "main"
+    );
+
+    maintenance.style.minHeight =
+    "calc(100vh - 250px)";
 
     maintenance.innerHTML = `
         <div style="
