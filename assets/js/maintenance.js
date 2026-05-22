@@ -78,7 +78,7 @@ function openMaintenance(data) {
     );
 
     window.location.href =
-            "/Wartung/";
+        "../Wartung/";
 }
 
 checkMaintenance();
