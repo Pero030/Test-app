@@ -262,6 +262,18 @@
                     Wartung speichern
                 </button>
 
+                <div
+                    id="activeMaintenanceBox"
+                    style="
+                        margin-top:30px;
+                        padding:25px;
+                        border-radius:20px;
+                        background:rgba(255,255,255,0.06);
+                        border:1px solid rgba(255,255,255,0.12);
+                        display:none;
+                    "
+                ></div>  
+
             </div>
 
         </div>
@@ -508,6 +520,54 @@
           "maintenanceType"
       ).value =
           data.type || "";
+
+          const box =
+              document.getElementById(
+                  "activeMaintenanceBox"
+              );
+
+          if (data.enabled) {
+
+              box.style.display = "block";
+
+              box.innerHTML = `
+                  <h3 style="
+                      margin-bottom:18px;
+                      color:#38bdf8;
+                  ">
+                      Aktive Wartung
+                  </h3>
+
+                  <p>
+                      <strong>Seite:</strong>
+                      ${page}
+                  </p>
+
+                  <p>
+                      <strong>Art:</strong>
+                      ${data.type || "-"}
+                  </p>
+
+                  <p>
+                      <strong>Dauer:</strong>
+                      ${data.duration || "-"}
+                  </p>
+
+                  <p>
+                      <strong>Nachricht:</strong>
+                      ${data.message || "-"}
+                  </p>
+
+                  <p>
+                      <strong>Datum:</strong>
+                      ${data.date || "-"}
+                  </p>
+              `;
+
+          } else {
+
+              box.style.display = "none";
+          }
         
     }
 
