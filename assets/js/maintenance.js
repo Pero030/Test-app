@@ -69,51 +69,46 @@ async function checkMaintenance() {
 
 function showMaintenance(data) {
 
-    const footer =
-    document.querySelector(
-        '[data-component="footer"]'
-    );
-
-    const bodyChildren =
-        Array.from(
-            document.body.children
-        );
-
-        bodyChildren.forEach(function(el) {
-
-    const isHeader =
-        el.hasAttribute(
-            "data-component"
-        ) &&
-        el.getAttribute(
-            "data-component"
-        ) === "header";
-
-    const isFooter =
-        el.hasAttribute(
-            "data-component"
-        ) &&
-        el.getAttribute(
-            "data-component"
-        ) === "footer";
-
-    if (
-        !isHeader &&
-        !isFooter
-    ) {
-
-        el.style.display =
-            "none";
-    }
-});
-
     const maintenance =
     document.createElement(
-        "main"
+        "div"
     );
 
-    maintenance.style.minHeight =
-    "calc(100vh - 250px)";
+    maintenance.style.position =
+        "fixed";
+
+    maintenance.style.top =
+        "110px";
+
+    maintenance.style.left =
+        "0";
+
+    maintenance.style.width =
+        "100%";
+
+    maintenance.style.height =
+        "calc(100vh - 220px)";
+
+    maintenance.style.zIndex =
+        "99999";
+
+    maintenance.style.display =
+        "flex";
+
+    maintenance.style.alignItems =
+        "center";
+
+    maintenance.style.justifyContent =
+        "center";
+
+    maintenance.style.padding =
+        "40px";
+
+    maintenance.style.background =
+        "rgba(2,6,23,0.92)";
+
+    maintenance.style.backdropFilter =
+        "blur(12px)";
 
     maintenance.innerHTML = `
         <div style="
@@ -185,11 +180,8 @@ function showMaintenance(data) {
         </div>
     `;
 
-    document.body.insertBefore(
-        maintenance,
-        document.querySelector(
-            '[data-component="footer"]'
-        )
+    document.body.appendChild(
+        maintenance
     );
 
 }
