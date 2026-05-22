@@ -52,6 +52,116 @@
           </div>
         </div>
       </div>
+
+      <div
+            class="glass-card purple-theme"
+            style="
+                padding:35px;
+                margin-top:30px;
+            "
+        >
+
+            <h2 style="margin-bottom:25px;">
+                🛠️ Wartungsmodus
+            </h2>
+
+            <label style="
+                display:block;
+                margin-bottom:10px;
+                color:#a855f7;
+                font-weight:800;
+            ">
+                Seite
+            </label>
+
+            <select
+                id="maintenancePage"
+                onchange="loadMaintenanceSettings()"
+                style="
+                    width:100%;
+                    margin-bottom:20px;
+                "
+            >
+                <option value="global">
+                    Gesamte Website
+                </option>
+
+                <option value="Startseite">
+                    Startseite
+                </option>
+
+                <option value="Ecommerce">
+                    Ecommerce
+                </option>
+
+                <option value="Bueromanagement">
+                    Büromanagement
+                </option>
+            </select>
+
+            <label style="
+                display:flex;
+                align-items:center;
+                gap:12px;
+                margin-bottom:25px;
+                font-weight:700;
+            ">
+
+                <input
+                    type="checkbox"
+                    id="maintenanceEnabled"
+                    style="
+                        width:20px;
+                        height:20px;
+                    "
+                >
+
+                Wartungsmodus aktivieren
+
+            </label>
+
+            <label style="
+                display:block;
+                margin-bottom:10px;
+                color:#38bdf8;
+                font-weight:800;
+            ">
+                Nachricht
+            </label>
+
+            <textarea
+                id="maintenanceMessage"
+                rows="5"
+                placeholder="z.B. Wartung von 12-14 Uhr"
+            ></textarea>
+
+            <label style="
+                display:block;
+                margin:20px 0 10px;
+                color:#38bdf8;
+                font-weight:800;
+            ">
+                Datum
+            </label>
+
+            <input
+                id="maintenanceDate"
+                type="text"
+                placeholder="25.09.2025"
+            >
+
+            <button
+                class="primary-btn"
+                onclick="saveMaintenanceSettings()"
+                style="
+                    width:100%;
+                    margin-top:25px;
+                "
+            >
+                Wartung speichern
+            </button>
+
+      </div>
     </section>
   </main>
 
@@ -67,13 +177,9 @@
       deleteDoc,
       doc,
       getDoc,
-      orderBy,
-      query
+      query,
+      setDoc
     } from "./assets/js/firebase.js";
-
-  
-  
-    const infoStorageKey = "aloAcademyInfos";
 
     async function getInfos() {
 
@@ -220,9 +326,18 @@
     }
 
     function showSettingsContent() {
-      document.getElementById("settingsLocked").style.display = "none";
-      document.getElementById("settingsContent").style.display = "block";
+
+      document.getElementById(
+        "settingsLocked"
+      ).style.display = "none";
+
+      document.getElementById(
+        "settingsContent"
+      ).style.display = "block";
+
       renderInfos();
+
+      loadMaintenanceSettings();
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -240,10 +355,106 @@
       }
     });
 
+    async function loadMaintenanceSettings() {
+
+      const page =
+        document.getElementById(
+          "maintenancePage"
+        ).value;
+
+      const snapshot =
+        await getDoc(
+
+          doc(
+            db,
+            "maintenance",
+            page
+          )
+        );
+
+      if (!snapshot.exists()) {
+        return;
+      }
+
+      const data =
+        snapshot.data();
+
+      document.getElementById(
+        "maintenanceEnabled"
+      ).checked =
+        data.enabled || false;
+
+      document.getElementById(
+        "maintenanceMessage"
+      ).value =
+        data.message || "";
+
+      document.getElementById(
+        "maintenanceDate"
+      ).value =
+        data.date || "";
+    }
+
+    async function saveMaintenanceSettings() {
+
+      const page =
+        document.getElementById(
+          "maintenancePage"
+        ).value;
+
+      const enabled =
+        document.getElementById(
+          "maintenanceEnabled"
+        ).checked;
+
+      const message =
+        document.getElementById(
+          "maintenanceMessage"
+        ).value;
+
+      const date =
+        document.getElementById(
+          "maintenanceDate"
+        ).value;
+
+      try {
+
+        await setDoc(
+
+          doc(
+            db,
+            "maintenance",
+            page
+          ),
+
+          {
+            enabled,
+            message,
+            date
+          }
+
+        );
+
+        alert(
+          "Wartung gespeichert"
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          "Fehler beim Speichern"
+        );
+      }
+    }
+
     window.saveInfo = saveInfo;
     window.deleteInfo = deleteInfo;
     window.clearInfos = clearInfos;
     window.unlockSettingsPage = unlockSettingsPage;
+    window.saveMaintenanceSettings = saveMaintenanceSettings;
+    window.loadMaintenanceSettings = loadMaintenanceSettings;
 
   </script>
 
