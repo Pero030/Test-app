@@ -69,16 +69,43 @@ async function checkMaintenance() {
 
 function showMaintenance(data) {
 
-    const main =
-        document.querySelector(
-            "main"
+    const footer =
+    document.querySelector(
+        '[data-component="footer"]'
+    );
+
+    const bodyChildren =
+        Array.from(
+            document.body.children
         );
 
-    if (main) {
+        bodyChildren.forEach(function(el) {
 
-        main.style.display =
+    const isHeader =
+        el.hasAttribute(
+            "data-component"
+        ) &&
+        el.getAttribute(
+            "data-component"
+        ) === "header";
+
+    const isFooter =
+        el.hasAttribute(
+            "data-component"
+        ) &&
+        el.getAttribute(
+            "data-component"
+        ) === "footer";
+
+    if (
+        !isHeader &&
+        !isFooter
+    ) {
+
+        el.style.display =
             "none";
     }
+});
 
     const maintenance =
     document.createElement(
