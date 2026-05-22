@@ -70,9 +70,9 @@ async function checkMaintenance() {
 function showMaintenance(data) {
 
     const maintenance =
-    document.createElement(
-        "div"
-    );
+        document.createElement(
+            "div"
+        );
 
     maintenance.style.position =
         "fixed";
