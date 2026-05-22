@@ -225,6 +225,24 @@
                 ></textarea>
 
                 <input
+                    id="maintenanceDuration"
+                    type="text"
+                    placeholder="12:00 - 14:00 Uhr"
+                    style="
+                        margin-top:20px;
+                    "
+                >
+
+                <input
+                    id="maintenanceType"
+                    type="text"
+                    placeholder="Systemupdate"
+                    style="
+                        margin-top:20px;
+                    "
+                >
+
+                <input
                     id="maintenanceDate"
                     type="text"
                     placeholder="25.09.2025"
@@ -480,6 +498,17 @@
         "maintenanceDate"
       ).value =
         data.date || "";
+
+      document.getElementById(
+          "maintenanceDuration"
+      ).value =
+          data.duration || "";
+
+      document.getElementById(
+          "maintenanceType"
+      ).value =
+          data.type || "";
+        
     }
 
     async function saveMaintenanceSettings() {
@@ -504,6 +533,16 @@
           "maintenanceDate"
         ).value;
 
+      const duration =
+        document.getElementById(
+            "maintenanceDuration"
+        ).value;
+
+      const type =
+        document.getElementById(
+            "maintenanceType"
+        ).value;
+
       try {
 
         await setDoc(
@@ -517,7 +556,9 @@
           {
             enabled,
             message,
-            date
+            date,
+            duration,
+            type
           }
 
         );
