@@ -36,5 +36,6 @@ export {
   deleteDoc,
   doc,
   orderBy,
+  setDoc,
   query
 };
