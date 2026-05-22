@@ -562,7 +562,23 @@
                       <strong>Datum:</strong>
                       ${data.date || "-"}
                   </p>
-              `;
+
+                  <button
+                      onclick="disableMaintenance()"
+                      style="
+                          margin-top:20px;
+                          background:#ef4444;
+                          color:white;
+                          padding:12px 18px;
+                          border:none;
+                          border-radius:14px;
+                          font-weight:800;
+                          cursor:pointer;
+                      "
+                  >
+                      Wartung beenden
+                  </button>
+                `;
 
           } else {
 
@@ -624,8 +640,10 @@
         );
 
         alert(
-          "Wartung gespeichert"
+            "Wartung gespeichert"
         );
+
+        loadMaintenanceSettings();
 
       } catch (error) {
 
@@ -637,12 +655,45 @@
       }
     }
 
+    async function disableMaintenance() {
+
+      const page =
+          document.getElementById(
+              "maintenancePage"
+          ).value;
+
+      await setDoc(
+
+          doc(
+              db,
+              "maintenance",
+              page
+          ),
+
+          {
+              enabled:false,
+              message:"",
+              date:"",
+              duration:"",
+              type:""
+          }
+
+      );
+
+      loadMaintenanceSettings();
+
+      alert(
+          "Wartung beendet"
+      );
+    }
+
     window.saveInfo = saveInfo;
     window.deleteInfo = deleteInfo;
     window.clearInfos = clearInfos;
     window.unlockSettingsPage = unlockSettingsPage;
     window.saveMaintenanceSettings = saveMaintenanceSettings;
     window.loadMaintenanceSettings = loadMaintenanceSettings;
+    window.disableMaintenance = disableMaintenance;
 
   </script>
 
