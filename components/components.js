@@ -64,7 +64,7 @@ import {
 
     return escaped.replace(
 
-        /(https?:\/\/[^\s]+)/g,
+        /((https?:\/\/)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}[^\s<]*)/g,
 
         function(url) {
 
