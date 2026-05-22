@@ -48,12 +48,33 @@ import {
   }
 
   function escapeHtml(value) {
+
     return String(value || "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+  }
+
+  function formatInfoText(text) {
+
+    const escaped =
+        escapeHtml(text);
+
+    return escaped.replace(
+
+        /(https?:\/\/[^\s]+)/g,
+
+        function(url) {
+
+            return '<a href="' + url + '" target="_blank" rel="noopener noreferrer" style="color:#38bdf8; font-weight:700; text-decoration:underline;">' +
+
+                url +
+
+            '</a>';
+        }
+    );
   }
 
   function closeInfoBell() {
@@ -274,7 +295,7 @@ import {
             '</div>' +
 
             '<p style="color:rgba(255,255,255,0.86); font-size:17px; line-height:1.7; margin:0; white-space:pre-wrap;">' +
-              escapeHtml(info.text) +
+              formatInfoText(info.text) +
             '</p>' +
 
             (info.date
