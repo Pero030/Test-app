@@ -69,23 +69,16 @@ async function checkMaintenance() {
 
 function showMaintenance(data) {
 
-    const gameContent =
-        document.getElementById(
-            "gameContent"
-        );
+    const main =
+            document.querySelector(
+                "main"
+            );
 
-    const landingMain =
-        document.querySelector(
-            ".landing-main"
-        );
+        if (main) {
 
-    if (gameContent) {
-        gameContent.style.display = "none";
-    }
-
-    if (landingMain) {
-        landingMain.style.display = "none";
-    }
+            main.style.display =
+                "none";
+        }
 
     const maintenance =
         document.createElement("div");
