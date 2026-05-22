@@ -1,7 +1,8 @@
 import {
     db,
     doc,
-    getDoc
+    getDoc,
+    setDoc
 } from "./firebase.js";
 
 const currentPage =
@@ -122,12 +123,29 @@ function showMaintenance(data) {
                     Wartung
                 </h1>
 
+                <h2 style="
+                font-size:32px;
+                margin-bottom:20px;
+                color:#38bdf8;
+            ">
+                ${data.type || "Wartung"}
+                </h2>
+
                 <p style="
                     font-size:22px;
                     line-height:1.8;
                     opacity:0.9;
                 ">
-                    ${data.message || "Diese Seite befindet sich aktuell in Wartung."}
+                    ${data.message || ""}
+                </p>
+
+                <p style="
+                    margin-top:20px;
+                    font-size:20px;
+                    color:#a855f7;
+                    font-weight:700;
+                ">
+                    ⏳ ${data.duration || ""}
                 </p>
 
                 <p style="
@@ -137,6 +155,24 @@ function showMaintenance(data) {
                 ">
                     ${data.date || ""}
                 </p>
+
+                <button
+                    id="endMaintenanceBtn"
+                    style="
+                        margin-top:30px;
+                        padding:14px 22px;
+                        border:none;
+                        border-radius:16px;
+                        background:#ef4444;
+                        color:white;
+                        font-size:18px;
+                        font-weight:800;
+                        cursor:pointer;
+                    "
+                >
+                    Wartung beenden
+                </button>
+
             </div>
         </div>
     `;
@@ -147,6 +183,39 @@ function showMaintenance(data) {
             '[data-component="footer"]'
         )
     );
+
+    const endBtn =
+        document.getElementById(
+            "endMaintenanceBtn"
+        );
+
+    if (endBtn) {
+
+        endBtn.onclick =
+            async function () {
+
+                await setDoc(
+
+                    doc(
+                        db,
+                        "maintenance",
+                        currentPage || "global"
+                    ),
+
+                    {
+                        enabled:false,
+                        message:"",
+                        date:"",
+                        duration:"",
+                        type:""
+                    }
+
+                );
+
+                location.reload();
+            };
+    }
+
 }
 
 checkMaintenance();
