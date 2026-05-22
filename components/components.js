@@ -147,10 +147,54 @@ import {
   }
 
   async function markAllInfosRead() {
-    const infos = await getInfos();
-    const allIds = infos.map(getInfoId);
-    setReadInfoIds(Array.from(new Set([].concat(getReadInfoIds(), allIds))));
+
+    const infos =
+        await getInfos();
+
+    const allIds =
+        infos.map(getInfoId);
+
+    setReadInfoIds(
+        Array.from(
+            new Set(
+                [].concat(
+                    getReadInfoIds(),
+                    allIds
+                )
+            )
+        )
+    );
+
     updateInfoBadge();
+
+    document
+        .querySelectorAll(".info-card")
+        .forEach(function(card) {
+
+            card.dataset.read = "true";
+
+            const buttonContainer =
+                card.querySelector(
+                    'button[onclick*="markInfoRead"]'
+                );
+
+            if (buttonContainer) {
+
+                buttonContainer.outerHTML =
+                    '<span style="background: rgba(34,197,94,0.16); color: #86efac; border: 1px solid rgba(34,197,94,0.35); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 800;">Gelesen</span>';
+            }
+        });
+
+    const unreadLabel =
+        document.querySelector(
+            "#infoBellOverlay .unread-count"
+        );
+
+    if (unreadLabel) {
+
+        unreadLabel.textContent =
+            "0 ungelesen";
+    }
   }
 
   async function openInfoBell() {
