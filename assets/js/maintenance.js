@@ -156,23 +156,6 @@ function showMaintenance(data) {
                     ${data.date || ""}
                 </p>
 
-                <button
-                    id="endMaintenanceBtn"
-                    style="
-                        margin-top:30px;
-                        padding:14px 22px;
-                        border:none;
-                        border-radius:16px;
-                        background:#ef4444;
-                        color:white;
-                        font-size:18px;
-                        font-weight:800;
-                        cursor:pointer;
-                    "
-                >
-                    Wartung beenden
-                </button>
-
             </div>
         </div>
     `;
@@ -183,38 +166,6 @@ function showMaintenance(data) {
             '[data-component="footer"]'
         )
     );
-
-    const endBtn =
-        document.getElementById(
-            "endMaintenanceBtn"
-        );
-
-    if (endBtn) {
-
-        endBtn.onclick =
-            async function () {
-
-                await setDoc(
-
-                    doc(
-                        db,
-                        "maintenance",
-                        currentPage || "global"
-                    ),
-
-                    {
-                        enabled:false,
-                        message:"",
-                        date:"",
-                        duration:"",
-                        type:""
-                    }
-
-                );
-
-                location.reload();
-            };
-    }
 
 }
 
