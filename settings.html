@@ -298,6 +298,18 @@
 
   <script type="module">
 
+
+    if (
+        sessionStorage.getItem(
+            "aloAcademySettingsUnlocked"
+        ) !== "true"
+    ) {
+
+        window.location.replace(
+            "./"
+        );
+    }
+
     import {
       db,
       collection,
@@ -715,19 +727,6 @@
 
 
   
-  <script>
-
-    window.addEventListener(
-        "beforeunload",
-        function () {
-
-            sessionStorage.removeItem(
-                "aloAcademySettingsUnlocked"
-            );
-
-        }
-     );
-
-  </script>
+  
 </body>
 </html>
