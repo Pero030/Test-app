@@ -298,6 +298,13 @@
 
   <script type="module">
 
+    // sessionStorage-Flag nur bei Browser-Navigation (Zurück/Vor) löschen
+    if (window.performance && window.performance.getEntriesByType) {
+      const navEntries = window.performance.getEntriesByType("navigation");
+      if (navEntries.length > 0 && navEntries[0].type === "back_forward") {
+        sessionStorage.removeItem("aloAcademySettingsUnlocked");
+      }
+    }
 
     if (
         sessionStorage.getItem(
