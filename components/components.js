@@ -369,8 +369,18 @@ import {
             "true"
         );
 
+        const modal =
+            document.getElementById(
+                "settingsPinModal"
+            );
+
+        const basePath =
+            modal
+                ? modal.dataset.basePath || "."
+                : ".";
+
         window.location.href =
-            "./settings.html";
+            basePath + "/settings.html";
 
     } else {
 
