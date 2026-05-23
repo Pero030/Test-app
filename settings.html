@@ -263,7 +263,19 @@
                         border:1px solid rgba(255,255,255,0.12);
                         display:none;
                     "
-                ></div>  
+                ></div>
+
+                <div
+                    id="allActiveMaintenances"
+                    style="
+                        margin-top:30px;
+                        display:flex;
+                        flex-direction:column;
+                        gap:20px;
+                    "
+                ></div>
+
+                <h3 style="margin-top:40px; color:#38bdf8;">Alle aktiven Wartungen</h3>  
 
             </div>
 
@@ -477,6 +489,7 @@
       renderInfos();
 
       loadMaintenanceSettings();
+      loadAllActiveMaintenances();
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -603,7 +616,58 @@
 
               box.style.display = "none";
           }
-        
+
+    }
+
+    async function loadAllActiveMaintenances() {
+      const container = document.getElementById("allActiveMaintenances");
+      if (!container) return;
+
+      const pages = ["global", "Startseite", "Ecommerce", "Bueromanagement"];
+      const activeMaintenances = [];
+
+      for (const page of pages) {
+        const snapshot = await getDoc(doc(db, "maintenance", page));
+        if (snapshot.exists()) {
+          const data = snapshot.data();
+          if (data.enabled) {
+            activeMaintenances.push({ page, ...data });
+          }
+        }
+      }
+
+      if (activeMaintenances.length === 0) {
+        container.innerHTML = "";
+        return;
+      }
+
+      container.innerHTML = activeMaintenances.map(m => `
+        <div style="padding:25px; border-radius:20px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
+          <h3 style="margin-bottom:18px; color:#38bdf8;">Aktive Wartung</h3>
+          <p><strong>Seite:</strong> ${m.page}</p>
+          <p><strong>Art:</strong> ${m.type || "-"}</p>
+          <p><strong>Dauer:</strong> ${m.duration || "-"}</p>
+          <p><strong>Nachricht:</strong> ${m.message || "-"}</p>
+          <p><strong>Datum:</strong> ${m.date || "-"}</p>
+          <button onclick="disableMaintenanceForPage('${m.page}')" style="margin-top:20px; background:#ef4444; color:white; padding:12px 18px; border:none; border-radius:14px; font-weight:800; cursor:pointer;">Wartung beenden</button>
+        </div>
+      `).join("");
+    }
+
+    async function disableMaintenanceForPage(page) {
+      await setDoc(
+        doc(db, "maintenance", page),
+        {
+          enabled: false,
+          message: "",
+          date: "",
+          duration: "",
+          type: ""
+        }
+      );
+      loadAllActiveMaintenances();
+      loadMaintenanceSettings();
+      alert("Wartung beendet");
     }
 
     async function saveMaintenanceSettings() {
@@ -659,22 +723,8 @@
             "Wartung gespeichert"
         );
 
-        // UI aktualisieren
-        const box = document.getElementById("activeMaintenanceBox");
-        if (enabled) {
-          box.style.display = "block";
-          box.innerHTML = `
-            <h3 style="margin-bottom:18px; color:#38bdf8;">Aktive Wartung</h3>
-            <p><strong>Seite:</strong> ${page}</p>
-            <p><strong>Art:</strong> ${type || "-"}</p>
-            <p><strong>Dauer:</strong> ${duration || "-"}</p>
-            <p><strong>Nachricht:</strong> ${message || "-"}</p>
-            <p><strong>Datum:</strong> ${date || "-"}</p>
-            <button onclick="disableMaintenance()" style="margin-top:20px; background:#ef4444; color:white; padding:12px 18px; border:none; border-radius:14px; font-weight:800; cursor:pointer;">Wartung beenden</button>
-          `;
-        } else {
-          box.style.display = "none";
-        }
+        // Alle aktiven Wartungen neu laden
+        loadAllActiveMaintenances();
 
       } catch (error) {
 
@@ -712,6 +762,7 @@
       );
 
       loadMaintenanceSettings();
+      loadAllActiveMaintenances();
 
       alert(
           "Wartung beendet"
@@ -725,6 +776,8 @@
     window.saveMaintenanceSettings = saveMaintenanceSettings;
     window.loadMaintenanceSettings = loadMaintenanceSettings;
     window.disableMaintenance = disableMaintenance;
+    window.loadAllActiveMaintenances = loadAllActiveMaintenances;
+    window.disableMaintenanceForPage = disableMaintenanceForPage;
 
   </script>
 
