@@ -172,42 +172,50 @@
                     🛠️ Wartungsmodus
                 </h2>
 
-                <select
-                    id="maintenancePage"
-                    onchange="loadMaintenanceSettings()"
-                    style="
-                        width:100%;
-                        margin-bottom:20px;
-                    "
-                >
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+                    <select
+                        id="maintenancePage"
+                        onchange="loadMaintenanceSettings()"
+                        style="
+                            flex:1;
+                        "
+                    >
 
-                    <option value="global">
-                        Gesamte Website
-                    </option>
+                        <option value="global">
+                            Gesamte Website
+                        </option>
 
-                    <option value="Startseite">
-                        Startseite
-                    </option>
+                        <option value="Startseite">
+                            Startseite
+                        </option>
 
-                    <option value="Ecommerce">
-                        Ecommerce
-                    </option>
+                        <option value="Ecommerce">
+                            Ecommerce
+                        </option>
 
-                    <option value="Bueromanagement">
-                        Büromanagement
-                    </option>
+                        <option value="Bueromanagement">
+                            Büromanagement
+                        </option>
 
-                </select>
+                    </select>
 
-                <p
-                    style="
-                        margin-bottom:25px;
-                        font-weight:700;
-                        color:#38bdf8;
-                    "
-                >
-                    Wartungsmodus wird beim Speichern automatisch aktiviert
-                </p>
+                    <button
+                        onclick="openMaintenanceInfo()"
+                        style="
+                            background:rgba(56,189,248,0.15);
+                            color:#38bdf8;
+                            border:1px solid rgba(56,189,248,0.4);
+                            border-radius:12px;
+                            padding:10px 14px;
+                            cursor:pointer;
+                            font-size:18px;
+                            font-weight:bold;
+                        "
+                        title="Info"
+                    >
+                        ℹ️
+                    </button>
+                </div>
 
                 <textarea
                     id="maintenanceMessage"
@@ -282,6 +290,27 @@
         <div id="legalContent" style="color: #ffffff; line-height: 1.8;"></div>
         <div style="text-align: center; margin-top: 40px;">
           <button class="modal-btn" onclick="closeLegalModal()">Schließen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Maintenance Info Modal -->
+  <div id="maintenanceInfoModal" class="modal-overlay" style="display:none;">
+    <div class="modal" style="max-width:600px;">
+      <div class="modal-content-scroll" style="padding:50px;">
+        <h3 style="color:#38bdf8; margin-bottom:20px;">ℹ️ Wartungsmodus Info</h3>
+        <p style="color:#ffffff; line-height:1.8;">
+          Um eine Seite oder die gesamte Website in den Wartungsmodus zu versetzen, wählen Sie bitte im Dropdown-Menü die jeweilige Seite aus und füllen Sie anschließend die Eingabefelder mit den entsprechenden Informationen aus.
+        </p>
+        <p style="color:#ffffff; line-height:1.8; margin-top:15px;">
+          Befindet sich eine Seite bereits im Wartungsmodus, wird dies in den Infokarten im unteren Bereich angezeigt.
+        </p>
+        <p style="color:#ffffff; line-height:1.8; margin-top:15px;">
+          Möchten Sie die Wartungsinformationen ändern, wählen Sie im Dropdown-Menü die aktuell im Wartungsmodus befindliche Seite aus.
+        </p>
+        <div style="text-align:center; margin-top:40px;">
+          <button class="modal-btn" onclick="closeMaintenanceInfo()">Schließen</button>
         </div>
       </div>
     </div>
@@ -701,6 +730,20 @@
     window.disableMaintenance = disableMaintenance;
     window.loadAllActiveMaintenances = loadAllActiveMaintenances;
     window.disableMaintenanceForPage = disableMaintenanceForPage;
+    window.openMaintenanceInfo = openMaintenanceInfo;
+    window.closeMaintenanceInfo = closeMaintenanceInfo;
+
+    function openMaintenanceInfo() {
+      const modal = document.getElementById("maintenanceInfoModal");
+      modal.style.display = "flex";
+      document.body.classList.add("modal-open");
+    }
+
+    function closeMaintenanceInfo() {
+      const modal = document.getElementById("maintenanceInfoModal");
+      modal.style.display = "none";
+      document.body.classList.remove("modal-open");
+    }
 
   </script>
 
