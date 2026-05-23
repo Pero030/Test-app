@@ -33,26 +33,49 @@
 
       <div id="settingsContent" style="display:none;">
 
-        <div
-            style="
-                display:flex;
-                flex-direction:column;
-                gap:30px;
-            "
-        >
+        <div class="layout" style="display: flex; gap: 30px; align-items: flex-start;">
+            <aside class="sidebar" style="width: 280px; flex-shrink: 0;">
+                <h2 style="color: #38bdf8; margin-bottom: 20px; font-size: 28px;">Einstellungen</h2>
 
-            <div
-                style="
-                    display:grid;
-                    grid-template-columns:
-                        repeat(
-                            auto-fit,
-                            minmax(420px,1fr)
-                        );
-                    gap:30px;
-                    align-items:start;
-                "
-            >
+                <div
+                    class="mission blue-border"
+                    id="menuMitteilungen"
+                    role="button"
+                    tabindex="0"
+                    onclick="showSettingsSection('mitteilungen')"
+                    onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showSettingsSection('mitteilungen'); }"
+                    style="padding: 15px 20px; border-radius: 12px; background: rgba(56, 189, 248, 0.1); border: 2px solid rgba(56, 189, 248, 0.3); cursor: pointer; margin-bottom: 15px; font-weight: 700; color: white; transition: all 0.3s;"
+                >
+                    📢 Mitteilungen
+                </div>
+
+                <div
+                    class="mission purple-border"
+                    id="menuWartung"
+                    role="button"
+                    tabindex="0"
+                    onclick="showSettingsSection('wartung')"
+                    onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showSettingsSection('wartung'); }"
+                    style="padding: 15px 20px; border-radius: 12px; background: rgba(168, 85, 247, 0.1); border: 2px solid rgba(168, 85, 247, 0.3); cursor: pointer; margin-bottom: 15px; font-weight: 700; color: white; transition: all 0.3s;"
+                >
+                    🛠️ Wartung
+                </div>
+            </aside>
+
+            <div style="flex: 1; min-width: 0;">
+                <div id="sectionMitteilungen" style="display: block;">
+                    <div
+                        style="
+                            display:grid;
+                            grid-template-columns:
+                                repeat(
+                                    auto-fit,
+                                    minmax(420px,1fr)
+                                );
+                            gap:30px;
+                            align-items:start;
+                        "
+                    >
 
                 <div
                     class="glass-card blue-theme"
@@ -160,120 +183,125 @@
                 </div>
 
             </div>
-
-            <div
-                class="glass-card purple-theme"
-                style="
-                    padding:35px;
-                "
-            >
-
-                <h2 style="margin-bottom:25px;">
-                    🛠️ Wartungsmodus
-                </h2>
-
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
-                    <select
-                        id="maintenancePage"
-                        onchange="loadMaintenanceSettings()"
-                        style="
-                            flex:1;
-                        "
-                    >
-
-                        <option value="global">
-                            Gesamte Website
-                        </option>
-
-                        <option value="Startseite">
-                            Startseite
-                        </option>
-
-                        <option value="Ecommerce">
-                            Ecommerce
-                        </option>
-
-                        <option value="Bueromanagement">
-                            Büromanagement
-                        </option>
-
-                    </select>
-
-                    <button
-                        onclick="openMaintenanceInfo()"
-                        style="
-                            background:rgba(56,189,248,0.15);
-                            color:white;
-                            width:46px;
-                            height:46px;
-                            padding:0;
-                            border-radius:12px;
-                            font-size:22px;
-                            border:1px solid rgba(56,189,248,0.4);
-                            cursor:pointer;
-                            font-weight:bold;
-                        "
-                        title="Info"
-                    >
-                        ℹ️
-                    </button>
                 </div>
 
-                <textarea
-                    id="maintenanceMessage"
-                    rows="5"
-                    placeholder="Infos (Wartung von 12-14 Uhr)"
-                ></textarea>
+                <div id="sectionWartung" style="display: none;">
+                    <div
+                        class="glass-card purple-theme"
+                        style="
+                            padding:35px;
+                        "
+                    >
 
-                <input
-                    id="maintenanceDuration"
-                    type="text"
-                    placeholder="Dauer (12:00 - 14:00 Uhr)"
-                    style="
-                        margin-top:20px;
-                    "
-                >
+                        <h2 style="margin-bottom:25px;">
+                            🛠️ Wartungsmodus
+                        </h2>
 
-                <input
-                    id="maintenanceType"
-                    type="text"
-                    placeholder="Grund (Systemupdate)"
-                    style="
-                        margin-top:20px;
-                    "
-                >
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+                            <select
+                                id="maintenancePage"
+                                onchange="loadMaintenanceSettings()"
+                                style="
+                                    flex:1;
+                                "
+                            >
 
-                <input
-                    id="maintenanceDate"
-                    type="text"
-                    placeholder="Datum TT.MM.JJ"
-                    style="
-                        margin-top:20px;
-                    "
-                >
+                                <option value="global">
+                                    Gesamte Website
+                                </option>
 
-                <button
-                    class="primary-btn"
-                    onclick="saveMaintenanceSettings()"
-                    style="
-                        width:100%;
-                        margin-top:25px;
-                    "
-                >
-                    Wartung speichern
-                </button>
+                                <option value="Startseite">
+                                    Startseite
+                                </option>
 
-                <h3 style="margin-top:40px; color:#38bdf8;">Alle aktiven Wartungen</h3>
+                                <option value="Ecommerce">
+                                    Ecommerce
+                                </option>
 
-                <div
-                    id="allActiveMaintenances"
-                    style="
-                        margin-top:20px;
-                        display:flex;
-                        flex-direction:column;
-                        gap:20px;
-                    "
-                ></div>  
+                                <option value="Bueromanagement">
+                                    Büromanagement
+                                </option>
+
+                            </select>
+
+                            <button
+                                onclick="openMaintenanceInfo()"
+                                style="
+                                    background:rgba(56,189,248,0.15);
+                                    color:white;
+                                    width:46px;
+                                    height:46px;
+                                    padding:0;
+                                    border-radius:12px;
+                                    font-size:22px;
+                                    border:1px solid rgba(56,189,248,0.4);
+                                    cursor:pointer;
+                                    font-weight:bold;
+                                "
+                                title="Info"
+                            >
+                                ℹ️
+                            </button>
+                        </div>
+
+                        <textarea
+                            id="maintenanceMessage"
+                            rows="5"
+                            placeholder="Infos (Wartung von 12-14 Uhr)"
+                        ></textarea>
+
+                        <input
+                            id="maintenanceDuration"
+                            type="text"
+                            placeholder="Dauer (12:00 - 14:00 Uhr)"
+                            style="
+                                margin-top:20px;
+                            "
+                        >
+
+                        <input
+                            id="maintenanceType"
+                            type="text"
+                            placeholder="Grund (Systemupdate)"
+                            style="
+                                margin-top:20px;
+                            "
+                        >
+
+                        <input
+                            id="maintenanceDate"
+                            type="text"
+                            placeholder="Datum TT.MM.JJ"
+                            style="
+                                margin-top:20px;
+                            "
+                        >
+
+                        <button
+                            class="primary-btn"
+                            onclick="saveMaintenanceSettings()"
+                            style="
+                                width:100%;
+                                margin-top:25px;
+                            "
+                        >
+                            Wartung speichern
+                        </button>
+
+                        <h3 style="margin-top:40px; color:#38bdf8;">Alle aktiven Wartungen</h3>
+
+                        <div
+                            id="allActiveMaintenances"
+                            style="
+                                margin-top:20px;
+                                display:flex;
+                                flex-direction:column;
+                                gap:20px;
+                            "
+                        ></div>
+
+                    </div>
+                </div>
 
             </div>
 
@@ -498,6 +526,9 @@
 
       loadMaintenanceSettings();
       loadAllActiveMaintenances();
+
+      // Mitteilungen-Sektion standardmäßig anzeigen
+      showSettingsSection('mitteilungen');
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -723,6 +754,7 @@
     window.disableMaintenanceForPage = disableMaintenanceForPage;
     window.openMaintenanceInfo = openMaintenanceInfo;
     window.closeMaintenanceInfo = closeMaintenanceInfo;
+    window.showSettingsSection = showSettingsSection;
 
     function openMaintenanceInfo() {
       const modal = document.getElementById("maintenanceInfoModal");
@@ -734,6 +766,29 @@
       const modal = document.getElementById("maintenanceInfoModal");
       modal.style.display = "none";
       document.body.classList.remove("modal-open");
+    }
+
+    function showSettingsSection(section) {
+      // Alle Sektionen ausblenden
+      document.getElementById("sectionMitteilungen").style.display = "none";
+      document.getElementById("sectionWartung").style.display = "none";
+
+      // Alle Menü-Buttons zurücksetzen
+      document.getElementById("menuMitteilungen").style.background = "rgba(56, 189, 248, 0.1)";
+      document.getElementById("menuMitteilungen").style.border = "2px solid rgba(56, 189, 248, 0.3)";
+      document.getElementById("menuWartung").style.background = "rgba(168, 85, 247, 0.1)";
+      document.getElementById("menuWartung").style.border = "2px solid rgba(168, 85, 247, 0.3)";
+
+      // Gewählte Sektion anzeigen und Button hervorheben
+      if (section === "mitteilungen") {
+        document.getElementById("sectionMitteilungen").style.display = "block";
+        document.getElementById("menuMitteilungen").style.background = "rgba(56, 189, 248, 0.3)";
+        document.getElementById("menuMitteilungen").style.border = "2px solid #38bdf8";
+      } else if (section === "wartung") {
+        document.getElementById("sectionWartung").style.display = "block";
+        document.getElementById("menuWartung").style.background = "rgba(168, 85, 247, 0.3)";
+        document.getElementById("menuWartung").style.border = "2px solid #a855f7";
+      }
     }
 
   </script>
