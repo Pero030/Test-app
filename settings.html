@@ -253,29 +253,17 @@
                     Wartung speichern
                 </button>
 
-                <div
-                    id="activeMaintenanceBox"
-                    style="
-                        margin-top:30px;
-                        padding:25px;
-                        border-radius:20px;
-                        background:rgba(255,255,255,0.06);
-                        border:1px solid rgba(255,255,255,0.12);
-                        display:none;
-                    "
-                ></div>
+                <h3 style="margin-top:40px; color:#38bdf8;">Alle aktiven Wartungen</h3>
 
                 <div
                     id="allActiveMaintenances"
                     style="
-                        margin-top:30px;
+                        margin-top:20px;
                         display:flex;
                         flex-direction:column;
                         gap:20px;
                     "
-                ></div>
-
-                <h3 style="margin-top:40px; color:#38bdf8;">Alle aktiven Wartungen</h3>  
+                ></div>  
 
             </div>
 
@@ -531,8 +519,7 @@
       const data =
         snapshot.data();
 
-      // Checkbox wurde entfernt, Wartungsmodus wird automatisch aktiviert
-
+      // Formularfelder füllen
       document.getElementById(
         "maintenanceMessage"
       ).value =
@@ -552,70 +539,6 @@
           "maintenanceType"
       ).value =
           data.type || "";
-
-          const box =
-              document.getElementById(
-                  "activeMaintenanceBox"
-              );
-
-          if (data.enabled) {
-
-              box.style.display = "block";
-
-              box.innerHTML = `
-                  <h3 style="
-                      margin-bottom:18px;
-                      color:#38bdf8;
-                  ">
-                      Aktive Wartung
-                  </h3>
-
-                  <p>
-                      <strong>Seite:</strong>
-                      ${page}
-                  </p>
-
-                  <p>
-                      <strong>Art:</strong>
-                      ${data.type || "-"}
-                  </p>
-
-                  <p>
-                      <strong>Dauer:</strong>
-                      ${data.duration || "-"}
-                  </p>
-
-                  <p>
-                      <strong>Nachricht:</strong>
-                      ${data.message || "-"}
-                  </p>
-
-                  <p>
-                      <strong>Datum:</strong>
-                      ${data.date || "-"}
-                  </p>
-
-                  <button
-                      onclick="disableMaintenance()"
-                      style="
-                          margin-top:20px;
-                          background:#ef4444;
-                          color:white;
-                          padding:12px 18px;
-                          border:none;
-                          border-radius:14px;
-                          font-weight:800;
-                          cursor:pointer;
-                      "
-                  >
-                      Wartung beenden
-                  </button>
-                `;
-
-          } else {
-
-              box.style.display = "none";
-          }
 
     }
 
