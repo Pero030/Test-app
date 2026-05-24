@@ -664,11 +664,18 @@
 
       renderInfos();
 
+      // Wartungen sofort laden
       loadMaintenanceSettings();
 
+      // Standardbereich
       showSettingsSection(
           "mitteilungen"
       );
+
+      // Wartungsbox trotzdem sichtbar halten
+      document.getElementById(
+          "activeMaintenanceBox"
+      ).style.display = "block";
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -688,10 +695,15 @@
 
     async function loadMaintenanceSettings() {
 
-      const page =
-        document.getElementById(
-          "maintenancePage"
-        ).value;
+      let page =
+          document.getElementById(
+            "maintenancePage"
+          ).value;
+
+        if (!page) {
+
+            page = "global";
+        }
 
       const snapshot =
           await getDoc(
@@ -709,8 +721,6 @@
 
       const data =
         snapshot.data();
-
-      // Checkbox wurde entfernt, Wartungsmodus wird automatisch aktiviert
 
       document.getElementById(
         "maintenanceMessage"
