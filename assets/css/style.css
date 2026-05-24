@@ -746,6 +746,24 @@ button:hover {
     border-color: inherit !important;
 }
 
+/* Wartungsmodus-Karte - größere Breite und besseres Layout */
+.glass-card.purple-theme-maintenance {
+    border: 1px solid #a855f7 !important;
+    box-shadow:
+        0 30px 80px -15px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(168, 85, 247, 0.25) !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+}
+
+.glass-card.purple-theme-maintenance:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 45px 100px -20px rgba(0, 0, 0, 1),
+        0 0 60px rgba(168, 85, 247, 0.45) !important;
+    border-color: inherit !important;
+}
+
 /* Skill-Karten in der Einleitung */
 .skill-card.blue-skill {
     background: rgba(15, 23, 42, 0.75) !important;
