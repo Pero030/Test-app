@@ -1760,13 +1760,15 @@ li[onclick]:hover {
     display:flex;
     gap:40px;
     align-items:flex-start;
+    width:100%;
 }
 
 .settings-sidebar{
     width:320px;
+    min-width:320px;
     flex-shrink:0;
-    position:sticky;
-    top:140px;
+    position:relative;
+    z-index:2;
 }
 
 .settings-sidebar h2{
