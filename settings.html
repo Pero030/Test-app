@@ -62,7 +62,7 @@
                 </div>
             </aside>
 
-            <div class="content" style=" margin-left:360px; width:calc(100% - 360px);">
+            <div class="content" style=" width:100%; min-width:0; flex:1;">
                 <div id="sectionMitteilungen" style="display: block;">
                     <div
                         style="
@@ -258,7 +258,9 @@
                             id="maintenanceMessage"
                             rows="5"
                             placeholder="Infos (Wartung von 12-14 Uhr)"
-                            style="margin-bottom: 30px;"
+                            style="width:100%;
+                                  box-sizing:border-box;
+                                  margin-bottom:30px;"
                         ></textarea>
 
                         <input
@@ -266,7 +268,9 @@
                             type="text"
                             placeholder="Dauer (12:00 - 14:00 Uhr)"
                             style="
-                                margin-bottom: 30px;
+                                width:100%;
+                                box-sizing:border-box;
+                                margin-bottom:30px;
                             "
                         >
 
