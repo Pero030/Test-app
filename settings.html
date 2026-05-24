@@ -185,12 +185,10 @@
 
                 <div id="sectionWartung" style="display: none; width: 100%;">
                     <div
-                        class="glass-card purple-theme"
+                        class="glass-card purple-theme-maintenance"
                         style="
-                            padding:50px;
+                            padding: 50px;
                             margin: 0 auto;
-                            width: 100% !important;
-                            max-width: 1200px !important;
                         "
                     >
 
@@ -198,7 +196,7 @@
                             🛠️ Wartungsmodus
                         </h2>
 
-                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+                        <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
                             <select
                                 id="maintenancePage"
                                 onchange="loadMaintenanceSettings()"
@@ -249,6 +247,7 @@
                             id="maintenanceMessage"
                             rows="5"
                             placeholder="Infos (Wartung von 12-14 Uhr)"
+                            style="margin-bottom: 25px;"
                         ></textarea>
 
                         <input
@@ -256,7 +255,7 @@
                             type="text"
                             placeholder="Dauer (12:00 - 14:00 Uhr)"
                             style="
-                                margin-top:20px;
+                                margin-bottom: 25px;
                             "
                         >
 
@@ -265,7 +264,7 @@
                             type="text"
                             placeholder="Grund (Systemupdate)"
                             style="
-                                margin-top:20px;
+                                margin-bottom: 25px;
                             "
                         >
 
@@ -274,7 +273,7 @@
                             type="text"
                             placeholder="Datum TT.MM.JJ"
                             style="
-                                margin-top:20px;
+                                margin-bottom: 25px;
                             "
                         >
 
