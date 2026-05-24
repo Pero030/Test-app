@@ -666,6 +666,9 @@
 
       loadMaintenanceSettings();
 
+      // Wartungs-Sektion standardmäßig anzeigen
+      document.getElementById("sectionWartung").style.display = "block";
+
       showSettingsSection(
           "mitteilungen"
       );
@@ -1208,8 +1211,9 @@
         mitteilungen.style.display =
             "none";
 
+        // Wartungs-Sektion immer anzeigen
         wartung.style.display =
-            "none";
+            "block";
 
         mitteilungenBtn.classList.remove(
             "active"
@@ -1230,9 +1234,6 @@
         }
 
         if (section === "wartung") {
-
-            wartung.style.display =
-                "block";
 
             wartungBtn.classList.add(
                 "active"
