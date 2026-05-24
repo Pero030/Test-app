@@ -756,9 +756,6 @@
               "activeMaintenanceBox"
           );
 
-      // Wartungs-Sektion immer anzeigen
-      document.getElementById("sectionWartung").style.display = "block";
-
       let activeMaintenance = null;
 
       for (const p of pages) {
@@ -789,10 +786,6 @@
       if (activeMaintenance) {
 
           box.style.display = "block";
-
-          // Wartungs-Sektion immer anzeigen
-          document.getElementById("sectionWartung").style.display = "block";
-
           box.innerHTML = `
 
                 <div
