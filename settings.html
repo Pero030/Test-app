@@ -664,7 +664,6 @@
       renderInfos();
 
       loadMaintenanceSettings();
-      loadAllActiveMaintenances();
 
       showSettingsSection(
           "mitteilungen"
@@ -740,6 +739,9 @@
           if (data.enabled) {
 
               box.style.display = "block";
+
+              // Wartungs-Sektion anzeigen, wenn eine aktive Wartung existiert
+              document.getElementById("sectionWartung").style.display = "block";
 
               box.innerHTML = `
     
@@ -823,139 +825,6 @@
               box.style.display = "none";
           }
 
-    }
-
-    async function loadAllActiveMaintenances() {
-
-      const container =
-          document.getElementById(
-              "allActiveMaintenances"
-          );
-
-      if (!container) return;
-
-      const pages =
-          [
-              "global",
-              "Startseite",
-              "Ecommerce",
-              "Bueromanagement"
-          ];
-
-      const activeMaintenances = [];
-
-      for (const page of pages) {
-
-          const snapshot =
-              await getDoc(
-                  doc(
-                      db,
-                      "maintenance",
-                      page
-                  )
-              );
-
-          if (snapshot.exists()) {
-
-              const data =
-                  snapshot.data();
-
-              if (data.enabled) {
-
-                  activeMaintenances.push(
-                      { page, ...data }
-                  );
-              }
-          }
-      }
-
-      if (activeMaintenances.length === 0) {
-
-          container.innerHTML = "";
-          return;
-      }
-
-      container.innerHTML =
-          activeMaintenances.map(m => `
-              <div
-                  style="
-                      padding:25px;
-                      border-radius:20px;
-                      background:rgba(255,255,255,0.06);
-                      border:1px solid rgba(255,255,255,0.12);
-                  "
-              >
-
-                  <h3
-                      style="
-                          margin-bottom:18px;
-                          color:#38bdf8;
-                      "
-                  >
-                      Aktive Wartung
-                  </h3>
-
-                  <p>
-                      <strong>Seite:</strong>
-                      ${m.page}
-                  </p>
-
-                  <p>
-                      <strong>Art:</strong>
-                      ${m.type || "-"}
-                  </p>
-
-                  <p>
-                      <strong>Dauer:</strong>
-                      ${m.duration || "-"}
-                  </p>
-
-                  <p>
-                      <strong>Nachricht:</strong>
-                      ${m.message || "-"}
-                  </p>
-
-                  <p>
-                      <strong>Datum:</strong>
-                      ${m.date || "-"}
-                  </p>
-
-                  <button
-                      onclick="disableMaintenanceForPage('${m.page}')"
-                      style="
-                          margin-top:20px;
-                          background:#ef4444;
-                          color:white;
-                          padding:12px 18px;
-                          border:none;
-                          border-radius:14px;
-                          font-weight:800;
-                          cursor:pointer;
-                      "
-                  >
-                      Wartung beenden
-                  </button>
-
-              </div>
-          `).join("");
-    }
-
-    async function disableMaintenanceForPage(page) {
-
-      await setDoc(
-        doc(db, "maintenance", page),
-        {
-          enabled: false,
-          message: "",
-          date: "",
-          duration: "",
-          type: ""
-        }
-      );
-
-      loadAllActiveMaintenances();
-      loadMaintenanceSettings();
-      alert("Wartung beendet");
     }
 
     async function saveMaintenanceSettings() {
@@ -1095,8 +964,6 @@
           box.style.display = "none";
         }
 
-        loadAllActiveMaintenances();
-
       } catch (error) {
 
         console.error(error);
@@ -1133,7 +1000,6 @@
       );
 
       loadMaintenanceSettings();
-      loadAllActiveMaintenances();
 
       alert(
           "Wartung beendet"
@@ -1303,7 +1169,6 @@
             );
 
             loadMaintenanceSettings();
-            loadAllActiveMaintenances();
         }
     }
 
@@ -1314,9 +1179,7 @@
     window.unlockSettingsPage = unlockSettingsPage;
     window.saveMaintenanceSettings = saveMaintenanceSettings;
     window.loadMaintenanceSettings = loadMaintenanceSettings;
-    window.loadAllActiveMaintenances = loadAllActiveMaintenances;
     window.disableMaintenance = disableMaintenance;
-    window.disableMaintenanceForPage = disableMaintenanceForPage;
     window.openMaintenanceDetails = openMaintenanceDetails;
     window.openMaintenanceInfoModal = openMaintenanceInfoModal;
     window.closeMaintenanceInfoModal = closeMaintenanceInfoModal;
