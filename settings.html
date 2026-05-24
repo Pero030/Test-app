@@ -693,7 +693,7 @@
         ).value;
 
       const snapshot =
-        await getDoc(
+          await getDoc(
 
           doc(
             db,
@@ -731,20 +731,56 @@
       ).value =
           data.type || "";
 
-          const box =
-              document.getElementById(
-                  "activeMaintenanceBox"
+      // Aktive Wartung für alle Seiten prüfen und anzeigen
+      const pages =
+          [
+              "global",
+              "Startseite",
+              "Ecommerce",
+              "Bueromanagement"
+          ];
+
+      const box =
+          document.getElementById(
+              "activeMaintenanceBox"
+          );
+
+      let activeMaintenance = null;
+
+      for (const p of pages) {
+
+          const s =
+              await getDoc(
+                  doc(
+                      db,
+                      "maintenance",
+                      p
+                  )
               );
 
-          if (data.enabled) {
+          if (s.exists()) {
 
-              box.style.display = "block";
+              const d =
+                  s.data();
 
-              // Wartungs-Sektion anzeigen, wenn eine aktive Wartung existiert
-              document.getElementById("sectionWartung").style.display = "block";
+              if (d.enabled) {
 
-              box.innerHTML = `
-    
+                  activeMaintenance =
+                      { page: p, ...d };
+                  break;
+              }
+          }
+      }
+
+      if (activeMaintenance) {
+
+          box.style.display = "block";
+
+          // Wartungs-Sektion anzeigen, wenn eine aktive Wartung existiert
+          document.getElementById("sectionWartung").style.display = "block";
+
+          box.innerHTML = `
+
                 <div
                     style="
                         display:flex;
@@ -762,7 +798,7 @@
                                 margin-bottom:8px;
                             "
                         >
-                            ${page}
+                            ${activeMaintenance.page}
                         </h3>
 
                         <p
@@ -771,7 +807,7 @@
                                 font-size:15px;
                             "
                         >
-                            ${data.date || "-"}
+                            ${activeMaintenance.date || "-"}
                         </p>
 
                     </div>
@@ -800,7 +836,7 @@
                         </button>
 
                         <button
-                            onclick="disableMaintenance()"
+                            onclick="disableMaintenanceForPage('${activeMaintenance.page}')"
                             style="
                                 flex:1;
                                 background:#ef4444;
@@ -820,11 +856,28 @@
                 </div>
             `;
 
-          } else {
+      } else {
 
-              box.style.display = "none";
-          }
+          box.style.display = "none";
+      }
 
+    }
+
+    async function disableMaintenanceForPage(page) {
+
+      await setDoc(
+        doc(db, "maintenance", page),
+        {
+          enabled: false,
+          message: "",
+          date: "",
+          duration: "",
+          type: ""
+        }
+      );
+
+      loadMaintenanceSettings();
+      alert("Wartung beendet");
     }
 
     async function saveMaintenanceSettings() {
@@ -1180,6 +1233,7 @@
     window.saveMaintenanceSettings = saveMaintenanceSettings;
     window.loadMaintenanceSettings = loadMaintenanceSettings;
     window.disableMaintenance = disableMaintenance;
+    window.disableMaintenanceForPage = disableMaintenanceForPage;
     window.openMaintenanceDetails = openMaintenanceDetails;
     window.openMaintenanceInfoModal = openMaintenanceInfoModal;
     window.closeMaintenanceInfoModal = closeMaintenanceInfoModal;
