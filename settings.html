@@ -125,86 +125,37 @@
 
         <div id="settingsContent" style="display:none;">
 
-            <div
-                style="
-                    display:grid;
-                    grid-template-columns:260px 1fr;
-                    gap:30px;
-                    align-items:start;
-                "
-            >
+            <div class="layout">
 
-                <!-- SIDEBAR -->
+                <aside class="sidebar">
 
-                <aside
-                    style="
-                        position:sticky;
-                        top:130px;
-                    "
-                >
+                    <h2>Einstellungen</h2>
 
                     <div
-                        class="glass-card"
-                        style="
-                            padding:25px;
-                            display:flex;
-                            flex-direction:column;
-                            gap:18px;
-                        "
+                        class="mission blue-border"
+                        id="settingsTabMitteilungen"
+                        role="button"
+                        tabindex="0"
+                        onclick="showSettingsSection('mitteilungen')"
+                        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showSettingsSection('mitteilungen'); }"
                     >
+                        📢 Mitteilungen
+                    </div>
 
-                        <h2
-                            style="
-                                color:#38bdf8;
-                                margin-bottom:10px;
-                            "
-                        >
-                            Einstellungen
-                        </h2>
-
-                        <button
-                            id="settingsTabMitteilungen"
-                            onclick="showSettingsSection('mitteilungen')"
-                            style="
-                                background:rgba(56,189,248,0.16);
-                                border:2px solid rgba(56,189,248,0.35);
-                                color:white;
-                                padding:16px 18px;
-                                border-radius:14px;
-                                font-size:16px;
-                                font-weight:800;
-                                text-align:left;
-                                cursor:pointer;
-                            "
-                        >
-                            📢 Mitteilungen
-                        </button>
-
-                        <button
-                            id="settingsTabWartung"
-                            onclick="showSettingsSection('wartung')"
-                            style="
-                                background:rgba(168,85,247,0.12);
-                                border:2px solid rgba(168,85,247,0.28);
-                                color:white;
-                                padding:16px 18px;
-                                border-radius:14px;
-                                font-size:16px;
-                                font-weight:800;
-                                text-align:left;
-                                cursor:pointer;
-                            "
-                        >
-                            🛠️ Wartung
-                        </button>
-
+                    <div
+                        class="mission purple-border"
+                        id="settingsTabWartung"
+                        role="button"
+                        tabindex="0"
+                        onclick="showSettingsSection('wartung')"
+                        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showSettingsSection('wartung'); }"
+                    >
+                        🛠️ Wartung
                     </div>
 
                 </aside>
 
-                <!-- RIGHT CONTENT -->
-
-                <div>
+                <div class="content">
 
                     <!-- MITTEILUNGEN -->
 
@@ -942,19 +893,22 @@
         wartung.style.display =
             "none";
 
-        mitteilungenBtn.style.background =
-            "rgba(56,189,248,0.16)";
+        mitteilungenBtn.classList.remove(
+            "active"
+        );
 
-        wartungBtn.style.background =
-            "rgba(168,85,247,0.12)";
+        wartungBtn.classList.remove(
+            "active"
+        );
 
         if (section === "mitteilungen") {
 
             mitteilungen.style.display =
                 "block";
 
-            mitteilungenBtn.style.background =
-                "rgba(56,189,248,0.3)";
+            mitteilungenBtn.classList.add(
+                "active"
+            );
         }
 
         if (section === "wartung") {
@@ -962,8 +916,9 @@
             wartung.style.display =
                 "block";
 
-            wartungBtn.style.background =
-                "rgba(168,85,247,0.3)";
+            wartungBtn.classList.add(
+                "active"
+            );
         }
     }
 
