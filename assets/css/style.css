@@ -1213,14 +1213,6 @@ button:hover {
     flex: 1;
 }
 
-.button-group-inline {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    align-items: center;
-    white-space: nowrap;
-}
-
 .helper-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(168, 85, 247, 0.45);
@@ -1733,8 +1725,10 @@ li[onclick]:hover {
     flex-direction: row;
     gap: 8px;
     align-items: center;
+    white-space: nowrap;
+}
 
-    .settings-layout{
+.settings-layout{
     display:flex;
     align-items:flex-start;
     gap:40px;
@@ -1896,6 +1890,4 @@ li[onclick]:hover {
     flex-direction:column;
     gap:24px;
     margin-top:30px;
-}
-    white-space: nowrap;
 }
