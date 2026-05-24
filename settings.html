@@ -916,57 +916,58 @@
 
     function showSettingsSection(section) {
 
-      const mitteilungen =
-          document.getElementById(
-              "sectionMitteilungen"
-          );
+        const mitteilungen =
+            document.getElementById(
+                "sectionMitteilungen"
+            );
 
-      const wartung =
-          document.getElementById(
-              "sectionWartung"
-          );
+        const wartung =
+            document.getElementById(
+                "sectionWartung"
+            );
 
-      const mitteilungenBtn =
-          document.getElementById(
-              "settingsTabMitteilungen"
-          );
+        const mitteilungenBtn =
+            document.getElementById(
+                "settingsTabMitteilungen"
+            );
 
-      const wartungBtn =
-          document.getElementById(
-              "settingsTabWartung"
-          );
+        const wartungBtn =
+            document.getElementById(
+                "settingsTabWartung"
+            );
 
-      mitteilungen.style.display =
-          "none";
+        mitteilungen.style.display =
+            "none";
 
-      wartung.style.display =
-          "none";
+        wartung.style.display =
+            "none";
 
-      mitteilungenBtn.style.background =
-          "rgba(56,189,248,0.16)";
+        mitteilungenBtn.style.background =
+            "rgba(56,189,248,0.16)";
 
-      wartungBtn.style.background =
-          "rgba(168,85,247,0.12)";
+        wartungBtn.style.background =
+            "rgba(168,85,247,0.12)";
 
-      if (section === "mitteilungen") {
+        if (section === "mitteilungen") {
 
-          mitteilungen.style.display =
-              "block";
+            mitteilungen.style.display =
+                "block";
 
-          mitteilungenBtn.style.background =
-              "rgba(56,189,248,0.3)";
-      }
+            mitteilungenBtn.style.background =
+                "rgba(56,189,248,0.3)";
+        }
 
-      if (section === "wartung") {
+        if (section === "wartung") {
 
-          wartung.style.display =
-              "block";
+            wartung.style.display =
+                "block";
 
-          wartungBtn.style.background =
-              "rgba(168,85,247,0.3)";
-      }
+            wartungBtn.style.background =
+                "rgba(168,85,247,0.3)";
+        }
     }
 
+    window.showSettingsSection = showSettingsSection;
     window.saveInfo = saveInfo;
     window.deleteInfo = deleteInfo;
     window.clearInfos = clearInfos;
