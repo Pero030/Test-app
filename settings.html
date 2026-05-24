@@ -33,6 +33,23 @@
             "
         >
 
+            <button
+                onclick="window.location.href='index.html'"
+                style="
+                    background:rgba(56,189,248,0.15);
+                    color:white;
+                    padding:12px 24px;
+                    border-radius:12px;
+                    font-size:16px;
+                    border:1px solid rgba(56,189,248,0.4);
+                    cursor:pointer;
+                    font-weight:bold;
+                    margin-bottom:20px;
+                "
+            >
+                Zur Startseite
+            </button>
+
             <h1
                 style="
                     font-size:52px;
@@ -695,15 +712,10 @@
 
     async function loadMaintenanceSettings() {
 
-      let page =
-          document.getElementById(
-            "maintenancePage"
-          ).value;
-
-        if (!page) {
-
-            page = "global";
-        }
+      const page =
+        document.getElementById(
+          "maintenancePage"
+        ).value;
 
       const snapshot =
           await getDoc(
@@ -756,6 +768,9 @@
               "activeMaintenanceBox"
           );
 
+      // Wartungs-Sektion immer anzeigen
+      document.getElementById("sectionWartung").style.display = "block";
+
       let activeMaintenance = null;
 
       for (const p of pages) {
@@ -786,6 +801,10 @@
       if (activeMaintenance) {
 
           box.style.display = "block";
+
+          // Wartungs-Sektion immer anzeigen
+          document.getElementById("sectionWartung").style.display = "block";
+
           box.innerHTML = `
 
                 <div
