@@ -297,110 +297,134 @@
                     >
 
                         <div
-                            class="glass-card purple-theme"
-                            style="padding:35px;"
+                            style="
+                                display:grid;
+                                grid-template-columns:1fr 1fr;
+                                gap:30px;
+                            "
                         >
 
-                            <h2 style="margin-bottom:25px;">
-                                🛠️ Wartungsmodus
-                            </h2>
-
-                            <select
-                                id="maintenancePage"
-                                onchange="loadMaintenanceSettings()"
-                                style="
-                                    width:100%;
-                                    margin-bottom:20px;
-                                "
-                            >
-
-                                <option value="global">
-                                    Gesamte Website
-                                </option>
-
-                                <option value="Startseite">
-                                    Startseite
-                                </option>
-
-                                <option value="Ecommerce">
-                                    Ecommerce
-                                </option>
-
-                                <option value="Bueromanagement">
-                                    Büromanagement
-                                </option>
-
-                            </select>
-
-                            <p
-                                style="
-                                    margin-bottom:25px;
-                                    font-weight:700;
-                                    color:#38bdf8;
-                                "
-                            >
-                                Wartungsmodus wird automatisch aktiviert.
-                            </p>
-
-                            <textarea
-                                id="maintenanceMessage"
-                                rows="5"
-                                placeholder="z.B. Wartung von 12-14 Uhr"
-                            ></textarea>
-
-                            <input
-                                id="maintenanceDuration"
-                                type="text"
-                                placeholder="12:00 - 14:00 Uhr"
-                                style="margin-top:20px;"
-                            >
-
-                            <input
-                                id="maintenanceType"
-                                type="text"
-                                placeholder="Systemupdate"
-                                style="margin-top:20px;"
-                            >
-
-                            <input
-                                id="maintenanceDate"
-                                type="text"
-                                placeholder="25.09.2025"
-                                style="margin-top:20px;"
-                            >
-
-                            <button
-                                class="primary-btn"
-                                onclick="saveMaintenanceSettings()"
-                                style="
-                                    width:100%;
-                                    margin-top:25px;
-                                "
-                            >
-                                Wartung speichern
-                            </button>
+                            <!-- LINKS: FORMULAR -->
 
                             <div
-                                id="activeMaintenanceBox"
-                                style="
-                                    margin-top:30px;
-                                    padding:25px;
-                                    border-radius:20px;
-                                    background:rgba(255,255,255,0.06);
-                                    border:1px solid rgba(255,255,255,0.12);
-                                    display:none;
-                                "
-                            ></div>
+                                class="glass-card purple-theme"
+                                style="padding:35px;"
+                            >
+
+                                <h2 style="margin-bottom:25px;">
+                                    🛠️ Wartungsmodus
+                                </h2>
+
+                                <select
+                                    id="maintenancePage"
+                                    onchange="loadMaintenanceSettings()"
+                                    style="
+                                        width:100%;
+                                        margin-bottom:20px;
+                                    "
+                                >
+
+                                    <option value="global">
+                                        Gesamte Website
+                                    </option>
+
+                                    <option value="Startseite">
+                                        Startseite
+                                    </option>
+
+                                    <option value="Ecommerce">
+                                        Ecommerce
+                                    </option>
+
+                                    <option value="Bueromanagement">
+                                        Büromanagement
+                                    </option>
+
+                                </select>
+
+                                <p
+                                    style="
+                                        margin-bottom:25px;
+                                        font-weight:700;
+                                        color:#38bdf8;
+                                    "
+                                >
+                                    Wartungsmodus wird automatisch aktiviert.
+                                </p>
+
+                                <textarea
+                                    id="maintenanceMessage"
+                                    rows="5"
+                                    placeholder="z.B. Wartung von 12-14 Uhr"
+                                ></textarea>
+
+                                <input
+                                    id="maintenanceDuration"
+                                    type="text"
+                                    placeholder="12:00 - 14:00 Uhr"
+                                    style="margin-top:20px;"
+                                >
+
+                                <input
+                                    id="maintenanceType"
+                                    type="text"
+                                    placeholder="Systemupdate"
+                                    style="margin-top:20px;"
+                                >
+
+                                <input
+                                    id="maintenanceDate"
+                                    type="text"
+                                    placeholder="25.09.2025"
+                                    style="margin-top:20px;"
+                                >
+
+                                <button
+                                    class="primary-btn"
+                                    onclick="saveMaintenanceSettings()"
+                                    style="
+                                        width:100%;
+                                        margin-top:25px;
+                                    "
+                                >
+                                    Wartung speichern
+                                </button>
+
+                            </div>
+
+                            <!-- RECHTS: INFO -->
 
                             <div
-                                id="allActiveMaintenances"
-                                style="
-                                    margin-top:30px;
-                                    display:flex;
-                                    flex-direction:column;
-                                    gap:20px;
-                                "
-                            ></div>
+                                class="glass-card blue-theme"
+                                style="padding:35px;"
+                            >
+
+                                <h2 style="margin-bottom:25px;">
+                                    📋 Wartungs-Info
+                                </h2>
+
+                                <div
+                                    id="activeMaintenanceBox"
+                                    style="
+                                        padding:25px;
+                                        border-radius:20px;
+                                        background:rgba(255,255,255,0.06);
+                                        border:1px solid rgba(255,255,255,0.12);
+                                        display:none;
+                                    "
+                                ></div>
+
+                                <div
+                                    id="allActiveMaintenances"
+                                    style="
+                                        margin-top:30px;
+                                        display:flex;
+                                        flex-direction:column;
+                                        gap:20px;
+                                    "
+                                ></div>
+
+                            </div>
 
                         </div>
 
