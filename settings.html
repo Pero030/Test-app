@@ -333,6 +333,10 @@
                                         "
                                     >
 
+                                        <option value="" disabled selected>
+                                            Seite wählen
+                                        </option>
+
                                         <option value="global">
                                             Gesamte Website
                                         </option>
@@ -345,7 +349,7 @@
                                             Ecommerce
                                         </option>
 
-                                        <option value="Bueromanagement">
+                                        <option value="Büromanagement">
                                             Büromanagement
                                         </option>
 
@@ -375,27 +379,27 @@
                                 <textarea
                                     id="maintenanceMessage"
                                     rows="5"
-                                    placeholder="z.B. Wartung von 12-14 Uhr"
+                                    placeholder="Detalierte Begründung"
                                 ></textarea>
 
                                 <input
                                     id="maintenanceDuration"
                                     type="text"
-                                    placeholder="12:00 - 14:00 Uhr"
+                                    placeholder="Dauer der Wartung (Datum oder Zeit)"
                                     style="margin-top:20px;"
                                 >
 
                                 <input
                                     id="maintenanceType"
                                     type="text"
-                                    placeholder="Systemupdate"
+                                    placeholder="Grund der Wartung"
                                     style="margin-top:20px;"
                                 >
 
                                 <input
                                     id="maintenanceDate"
                                     type="text"
-                                    placeholder="25.09.2025"
+                                    placeholder="Aktuelles Datum (TT.MM.JJ)"
                                     style="margin-top:20px;"
                                 >
 
@@ -407,12 +411,10 @@
                                         margin-top:25px;
                                     "
                                 >
-                                    Wartung speichern
+                                    Wartung Aktivieren
                                 </button>
 
                             </div>
-
-                            <!-- RECHTS: INFO -->
 
                             <div
                                 class="glass-card blue-theme"
@@ -737,7 +739,7 @@
               "global",
               "Startseite",
               "Ecommerce",
-              "Bueromanagement"
+              "Büromanagement"
           ];
 
       const box =
