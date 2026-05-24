@@ -33,7 +33,7 @@
 
       <div id="settingsContent" style="display:none;">
 
-        <div class="layout" style="display:block;padding:40px 40px 40px 0px; max-width:100%; margin:0;">
+        <div class="layout" style="display:block;padding:40px 40px 40px 0px; max-width: 100%; margin: 0;">
             <aside class="sidebar">
                 <h2 style="color: #38bdf8; margin-bottom: 20px; font-size: 24px;">Einstellungen</h2>
 
@@ -62,7 +62,7 @@
                 </div>
             </aside>
 
-            <div class="content" style=" width:calc(100% - 380px); margin-left:380px;">
+            <div class="content" style=" width:100%; min-width:0; flex:1;">
                 <div id="sectionMitteilungen" style="display: block;">
                     <div
                         style="
@@ -184,14 +184,24 @@
                 </div>
 
                 <div id="sectionWartung" style="display: none; width: 100%;">
+
                     <div
-                        class="glass-card purple-theme-maintenance"
                         style="
                             width:100%;
-                            padding:60px;
-                            box-sizing:border-box;
+                            display:flex;
+                            justify-content:center;
                         "
                     >
+
+                        <div
+                            class="glass-card purple-theme-maintenance"
+                            style="
+                                width:100%;
+                                max-width:1200px;
+                                padding:60px;
+                                box-sizing:border-box;
+                            "
+                        >
 
                         <h2 style="margin-bottom:35px;">
                             🛠️ Wartungsmodus
