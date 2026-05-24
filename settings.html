@@ -65,274 +65,46 @@
 
             </div>
 
-            <!-- LOCK -->
-
-            <div
-                id="settingsLocked"
-                class="settings-lock"
-                style="display:none;"
-            >
-
-                <h2>
-                    Zugriff geschützt
-                </h2>
-
-                <p>
-                    Bitte gib den PIN ein.
-                </p>
-
-                <input
-                    id="settingsPinInput"
-                    type="password"
-                    placeholder="PIN"
-                >
-
-                <div class="settings-lock-actions">
-
-                    <button
-                        class="primary-btn"
-                        onclick="unlockSettingsPage()"
-                    >
-                        Entsperren
-                    </button>
-
-                    <button
-                        class="secondary-btn"
-                        onclick="location.href='./'"
-                    >
-                        Zur Startseite
-                    </button>
-
-                </div>
-
-                <p
-                    id="settingsPinError"
-                    class="settings-error"
-                    style="display:none;"
-                >
-                    Falscher PIN.
-                </p>
-
-            </div>
-
-            <!-- CONTENT -->
-
             <div
                 id="settingsContent"
-                style="display:none;"
+                style="display:block;"
             >
 
                 <div class="settings-layout">
-
-                    <!-- SIDEBAR -->
 
                     <aside
                         class="settings-sidebar"
                         style="
                             background:red;
-                            min-height:500px;
                             min-width:320px;
+                            padding:30px;
                         "
                     >
 
-                        <h2>
-                            Einstellungen
+                        <h2 style="color:white;">
+                            TEST SIDEBAR
                         </h2>
 
-                        <button
-                            id="menuMitteilungen"
-                            class="settings-menu-btn blue active"
-                            onclick="showSettingsSection('mitteilungen')"
-                        >
-                            📢 Mitteilungen
+                        <button>
+                            Mitteilungen
                         </button>
 
-                        <button
-                            id="menuWartung"
-                            class="settings-menu-btn purple"
-                            onclick="showSettingsSection('wartung')"
-                        >
-                            🛠️ Wartung
+                        <button>
+                            Wartung
                         </button>
 
                     </aside>
 
-                    <!-- CONTENT -->
+                    <div
+                        class="settings-content"
+                        style="
+                            background:blue;
+                            min-height:500px;
+                            width:100%;
+                        "
+                    >
 
-                    <div class="settings-content">
-
-                        <!-- MITTEILUNGEN -->
-
-                        <section
-                            id="sectionMitteilungen"
-                            class="settings-section"
-                        >
-
-                            <div class="info-grid">
-
-                                <div class="glass-card blue-theme settings-card">
-
-                                    <h2>
-                                        Neue Info
-                                    </h2>
-
-                                    <label for="infoTitle">
-                                        Titel
-                                    </label>
-
-                                    <input
-                                        id="infoTitle"
-                                        type="text"
-                                        placeholder="z.B. Wartung am Freitag"
-                                    >
-
-                                    <label for="infoText">
-                                        Text
-                                    </label>
-
-                                    <textarea
-                                        id="infoText"
-                                        rows="7"
-                                        placeholder="Schreibe hier die Information..."
-                                    ></textarea>
-
-                                    <button
-                                        class="primary-btn full-btn"
-                                        onclick="saveInfo()"
-                                    >
-                                        Info speichern
-                                    </button>
-
-                                    <p
-                                        id="saveFeedback"
-                                        class="success-text"
-                                    >
-                                        Info gespeichert.
-                                    </p>
-
-                                </div>
-
-                                <div class="glass-card purple-theme settings-card">
-
-                                    <div class="settings-top-row">
-
-                                        <h2>
-                                            Aktuelle Infos
-                                        </h2>
-
-                                        <button
-                                            onclick="clearInfos()"
-                                            class="danger-btn"
-                                        >
-                                            Alle löschen
-                                        </button>
-
-                                    </div>
-
-                                    <div id="infoList"></div>
-
-                                </div>
-
-                            </div>
-
-                        </section>
-
-                        <!-- WARTUNG -->
-
-                        <section
-                            id="sectionWartung"
-                            class="settings-section"
-                            style="display:none;"
-                        >
-
-                            <div class="maintenance-wrapper">
-
-                                <div class="glass-card purple-theme-maintenance maintenance-card">
-
-                                    <h2 class="maintenance-title">
-                                        🛠️ Wartungsmodus
-                                    </h2>
-
-                                    <div class="maintenance-header">
-
-                                        <select
-                                            id="maintenancePage"
-                                            onchange="loadMaintenanceSettings()"
-                                        >
-
-                                            <option value="global">
-                                                Gesamte Website
-                                            </option>
-
-                                            <option value="Startseite">
-                                                Startseite
-                                            </option>
-
-                                            <option value="Ecommerce">
-                                                Ecommerce
-                                            </option>
-
-                                            <option value="Bueromanagement">
-                                                Büromanagement
-                                            </option>
-
-                                        </select>
-
-                                        <button
-                                            onclick="openMaintenanceInfo()"
-                                            class="maintenance-info-btn"
-                                        >
-                                            ℹ️
-                                        </button>
-
-                                    </div>
-
-                                    <textarea
-                                        id="maintenanceMessage"
-                                        rows="5"
-                                        placeholder="Infos (Wartung von 12-14 Uhr)"
-                                    ></textarea>
-
-                                    <input
-                                        id="maintenanceDuration"
-                                        type="text"
-                                        placeholder="Dauer (12:00 - 14:00 Uhr)"
-                                    >
-
-                                    <input
-                                        id="maintenanceType"
-                                        type="text"
-                                        placeholder="Grund (Systemupdate)"
-                                    >
-
-                                    <input
-                                        id="maintenanceDate"
-                                        type="text"
-                                        placeholder="Datum TT.MM.JJ"
-                                    >
-
-                                    <button
-                                        class="primary-btn full-btn"
-                                        onclick="saveMaintenanceSettings()"
-                                    >
-                                        Wartung speichern
-                                    </button>
-
-                                </div>
-
-                                <div class="glass-card maintenance-active-card">
-
-                                    <h3>
-                                        Aktive Wartungen
-                                    </h3>
-
-                                    <div id="allActiveMaintenances"></div>
-
-                                </div>
-
-                            </div>
-
-                        </section>
+                        TEST CONTENT
 
                     </div>
 
