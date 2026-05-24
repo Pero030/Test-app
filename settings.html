@@ -862,7 +862,20 @@
 
       } else {
 
-          box.style.display = "none";
+          box.style.display = "block";
+
+          box.innerHTML = `
+
+                <div
+                    style="
+                        padding:25px;
+                        text-align:center;
+                        color:rgba(255,255,255,0.65);
+                    "
+                >
+                    Keine aktive Wartung
+                </div>
+            `;
       }
 
     }
