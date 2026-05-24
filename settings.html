@@ -1,195 +1,333 @@
-<div class="settings-layout">
+<!DOCTYPE html>
+<html lang="de">
 
-    <aside class="settings-sidebar">
+<head>
 
-        <h2 class="settings-sidebar-title">
-            Einstellungen
-        </h2>
+    <meta charset="UTF-8">
 
-        <button
-            id="menuMitteilungen"
-            class="settings-menu-btn active blue"
-            onclick="showSettingsSection('mitteilungen')"
-        >
-            📢 Mitteilungen
-        </button>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-        <button
-            id="menuWartung"
-            class="settings-menu-btn purple"
-            onclick="showSettingsSection('wartung')"
-        >
-            🛠️ Wartung
-        </button>
+    <meta
+        name="HandheldFriendly"
+        content="true"
+    >
 
-    </aside>
+    <meta
+        name="MobileOptimized"
+        content="width"
+    >
 
-    <div class="settings-content">
+    <meta
+        name="format-detection"
+        content="telephone=no"
+    >
 
-        <!-- MITTEILUNGEN -->
+    <title>
+        Einstellungen - ALO Academy
+    </title>
 
-        <section
-            id="sectionMitteilungen"
-            class="settings-section"
-        >
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
 
-            <div class="info-grid">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
+        rel="stylesheet"
+    >
 
-                <div class="glass-card blue-theme settings-card">
+</head>
 
-                    <h2>Neue Info</h2>
+<body>
 
-                    <label for="infoTitle">
-                        Titel
-                    </label>
+    <div
+        data-component="header"
+        data-variant="home"
+        data-component-base="."
+    ></div>
 
-                    <input
-                        id="infoTitle"
-                        type="text"
-                        placeholder="z.B. Wartung am Freitag"
-                    >
+    <main class="settings-page">
 
-                    <label for="infoText">
-                        Text
-                    </label>
+        <section class="settings-wrapper">
 
-                    <textarea
-                        id="infoText"
-                        rows="7"
-                        placeholder="Schreibe hier die Information..."
-                    ></textarea>
+            <div class="settings-hero">
+
+                <h1>
+                    Einstellungen
+                </h1>
+
+                <p>
+                    Verwaltung von Mitteilungen und Wartungsmodus.
+                </p>
+
+            </div>
+
+            <!-- LOCK -->
+
+            <div
+                id="settingsLocked"
+                class="settings-lock"
+                style="display:none;"
+            >
+
+                <h2>
+                    Zugriff geschützt
+                </h2>
+
+                <p>
+                    Bitte gib den PIN ein.
+                </p>
+
+                <input
+                    id="settingsPinInput"
+                    type="password"
+                    placeholder="PIN"
+                >
+
+                <div class="settings-lock-actions">
 
                     <button
                         class="primary-btn"
-                        onclick="saveInfo()"
+                        onclick="unlockSettingsPage()"
                     >
-                        Info speichern
+                        Entsperren
                     </button>
 
-                    <p
-                        id="saveFeedback"
-                        class="success-text"
+                    <button
+                        class="secondary-btn"
+                        onclick="location.href='./'"
                     >
-                        Info gespeichert.
-                    </p>
+                        Zur Startseite
+                    </button>
 
                 </div>
 
-                <div class="glass-card purple-theme settings-card">
+                <p
+                    id="settingsPinError"
+                    class="settings-error"
+                    style="display:none;"
+                >
+                    Falscher PIN.
+                </p>
 
-                    <div class="settings-header-row">
+            </div>
+
+            <!-- CONTENT -->
+
+            <div
+                id="settingsContent"
+                style="display:none;"
+            >
+
+                <div class="settings-layout">
+
+                    <!-- SIDEBAR -->
+
+                    <aside class="settings-sidebar">
 
                         <h2>
-                            Aktuelle Infos
+                            Einstellungen
                         </h2>
 
                         <button
-                            onclick="clearInfos()"
-                            class="danger-btn"
+                            id="menuMitteilungen"
+                            class="settings-menu-btn blue active"
+                            onclick="showSettingsSection('mitteilungen')"
                         >
-                            Alle löschen
+                            📢 Mitteilungen
                         </button>
-
-                    </div>
-
-                    <div id="infoList"></div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- WARTUNG -->
-
-        <section
-            id="sectionWartung"
-            class="settings-section"
-            style="display:none;"
-        >
-
-            <div class="maintenance-wrapper">
-
-                <div class="glass-card purple-theme-maintenance maintenance-card">
-
-                    <h2 class="maintenance-title">
-                        🛠️ Wartungsmodus
-                    </h2>
-
-                    <div class="maintenance-topbar">
-
-                        <select
-                            id="maintenancePage"
-                            onchange="loadMaintenanceSettings()"
-                        >
-
-                            <option value="global">
-                                Gesamte Website
-                            </option>
-
-                            <option value="Startseite">
-                                Startseite
-                            </option>
-
-                            <option value="Ecommerce">
-                                Ecommerce
-                            </option>
-
-                            <option value="Bueromanagement">
-                                Büromanagement
-                            </option>
-
-                        </select>
 
                         <button
-                            onclick="openMaintenanceInfo()"
-                            class="maintenance-info-btn"
+                            id="menuWartung"
+                            class="settings-menu-btn purple"
+                            onclick="showSettingsSection('wartung')"
                         >
-                            ℹ️
+                            🛠️ Wartung
                         </button>
 
+                    </aside>
+
+                    <!-- CONTENT -->
+
+                    <div class="settings-content">
+
+                        <!-- MITTEILUNGEN -->
+
+                        <section
+                            id="sectionMitteilungen"
+                            class="settings-section"
+                        >
+
+                            <div class="info-grid">
+
+                                <div class="glass-card blue-theme settings-card">
+
+                                    <h2>
+                                        Neue Info
+                                    </h2>
+
+                                    <label for="infoTitle">
+                                        Titel
+                                    </label>
+
+                                    <input
+                                        id="infoTitle"
+                                        type="text"
+                                        placeholder="z.B. Wartung am Freitag"
+                                    >
+
+                                    <label for="infoText">
+                                        Text
+                                    </label>
+
+                                    <textarea
+                                        id="infoText"
+                                        rows="7"
+                                        placeholder="Schreibe hier die Information..."
+                                    ></textarea>
+
+                                    <button
+                                        class="primary-btn full-btn"
+                                        onclick="saveInfo()"
+                                    >
+                                        Info speichern
+                                    </button>
+
+                                    <p
+                                        id="saveFeedback"
+                                        class="success-text"
+                                    >
+                                        Info gespeichert.
+                                    </p>
+
+                                </div>
+
+                                <div class="glass-card purple-theme settings-card">
+
+                                    <div class="settings-top-row">
+
+                                        <h2>
+                                            Aktuelle Infos
+                                        </h2>
+
+                                        <button
+                                            onclick="clearInfos()"
+                                            class="danger-btn"
+                                        >
+                                            Alle löschen
+                                        </button>
+
+                                    </div>
+
+                                    <div id="infoList"></div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <!-- WARTUNG -->
+
+                        <section
+                            id="sectionWartung"
+                            class="settings-section"
+                            style="display:none;"
+                        >
+
+                            <div class="maintenance-wrapper">
+
+                                <div class="glass-card purple-theme-maintenance maintenance-card">
+
+                                    <h2 class="maintenance-title">
+                                        🛠️ Wartungsmodus
+                                    </h2>
+
+                                    <div class="maintenance-header">
+
+                                        <select
+                                            id="maintenancePage"
+                                            onchange="loadMaintenanceSettings()"
+                                        >
+
+                                            <option value="global">
+                                                Gesamte Website
+                                            </option>
+
+                                            <option value="Startseite">
+                                                Startseite
+                                            </option>
+
+                                            <option value="Ecommerce">
+                                                Ecommerce
+                                            </option>
+
+                                            <option value="Bueromanagement">
+                                                Büromanagement
+                                            </option>
+
+                                        </select>
+
+                                        <button
+                                            onclick="openMaintenanceInfo()"
+                                            class="maintenance-info-btn"
+                                        >
+                                            ℹ️
+                                        </button>
+
+                                    </div>
+
+                                    <textarea
+                                        id="maintenanceMessage"
+                                        rows="5"
+                                        placeholder="Infos (Wartung von 12-14 Uhr)"
+                                    ></textarea>
+
+                                    <input
+                                        id="maintenanceDuration"
+                                        type="text"
+                                        placeholder="Dauer (12:00 - 14:00 Uhr)"
+                                    >
+
+                                    <input
+                                        id="maintenanceType"
+                                        type="text"
+                                        placeholder="Grund (Systemupdate)"
+                                    >
+
+                                    <input
+                                        id="maintenanceDate"
+                                        type="text"
+                                        placeholder="Datum TT.MM.JJ"
+                                    >
+
+                                    <button
+                                        class="primary-btn full-btn"
+                                        onclick="saveMaintenanceSettings()"
+                                    >
+                                        Wartung speichern
+                                    </button>
+
+                                </div>
+
+                                <div class="glass-card maintenance-active-card">
+
+                                    <h3>
+                                        Aktive Wartungen
+                                    </h3>
+
+                                    <div id="allActiveMaintenances"></div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
                     </div>
-
-                    <textarea
-                        id="maintenanceMessage"
-                        rows="5"
-                        placeholder="Infos (Wartung von 12-14 Uhr)"
-                    ></textarea>
-
-                    <input
-                        id="maintenanceDuration"
-                        type="text"
-                        placeholder="Dauer (12:00 - 14:00 Uhr)"
-                    >
-
-                    <input
-                        id="maintenanceType"
-                        type="text"
-                        placeholder="Grund (Systemupdate)"
-                    >
-
-                    <input
-                        id="maintenanceDate"
-                        type="text"
-                        placeholder="Datum TT.MM.JJ"
-                    >
-
-                    <button
-                        class="primary-btn maintenance-save-btn"
-                        onclick="saveMaintenanceSettings()"
-                    >
-                        Wartung speichern
-                    </button>
-
-                </div>
-
-                <div class="glass-card maintenance-active-card">
-
-                    <h3>
-                        Aktive Wartungen
-                    </h3>
-
-                    <div id="allActiveMaintenances"></div>
 
                 </div>
 
@@ -197,6 +335,18 @@
 
         </section>
 
-    </div>
+    </main>
 
-</div>
+    <div
+        data-component="footer"
+        data-variant="home"
+        data-component-base="."
+    ></div>
+
+    <script type="module" src="components/components.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/game.js"></script>
+
+</body>
+
+</html>
