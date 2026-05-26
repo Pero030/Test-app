@@ -305,7 +305,7 @@ const products = {
     ],
   },
   bottle: {
-    title: "Edelstahl Trinkflasche",
+    title: "Premium Edelstahl-Trinkflasche [Füllmenge, z.B. 1L] – BPA-frei & Auslaufsicher",
     task: "Erstelle eine Produktseite für eine Trinkflasche.",
     imageOptions: [
       {
