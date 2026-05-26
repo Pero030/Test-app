@@ -23,10 +23,10 @@ async function loadEcommerceHelperButtonsSetting() {
       console.log('Anzahl der Hilfe-Buttons:', helperButtons.length);
       helperButtons.forEach(button => {
         if (helperButtonsEnabled) {
-          button.classList.remove('hidden');
+          button.style.display = 'inline-block';
           console.log('Hilfe-Button angezeigt');
         } else {
-          button.classList.add('hidden');
+          button.style.display = 'none';
           console.log('Hilfe-Button ausgeblendet');
         }
       });
@@ -35,7 +35,7 @@ async function loadEcommerceHelperButtonsSetting() {
       // Standardmäßig aktiviert
       const helperButtons = document.querySelectorAll('.helper-btn');
       helperButtons.forEach(button => {
-        button.classList.remove('hidden');
+        button.style.display = 'inline-block';
       });
     }
   } catch (error) {
@@ -47,7 +47,7 @@ async function loadEcommerceHelperButtonsSetting() {
 function hideHelperButtons() {
   const helperButtons = document.querySelectorAll('.helper-btn');
   helperButtons.forEach(button => {
-    button.classList.add('hidden');
+    button.style.display = 'none';
   });
 }
 
@@ -55,7 +55,7 @@ function hideHelperButtons() {
 function showHelperButtons() {
   const helperButtons = document.querySelectorAll('.helper-btn');
   helperButtons.forEach(button => {
-    button.classList.remove('hidden');
+    button.style.display = 'inline-block';
   });
 }
 
