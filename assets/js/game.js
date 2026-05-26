@@ -903,3 +903,4 @@ function helpConversion() {
     showModal("Tipp", "Wähle zuerst ein Produkt aus.");
   }
 }
+
