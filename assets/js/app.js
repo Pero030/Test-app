@@ -9,7 +9,7 @@ let seoWords = [];
 // --- E-Commerce Hilfe-Buttons Einstellung ---
 async function loadEcommerceHelperButtonsSetting() {
   try {
-    const { db, doc, getDoc } = await import('/assets/js/firebase.js');
+    const { db, doc, getDoc } = await import('./firebase.js');
     const snapshot = await getDoc(doc(db, 'settings', 'ecommerce'));
 
     if (snapshot.exists()) {
