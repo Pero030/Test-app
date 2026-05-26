@@ -691,6 +691,11 @@
           if (event.key === "Enter") unlockSettingsPage();
         });
       }
+
+      // PIN-Flag löschen, wenn die Seite verlassen wird
+      window.addEventListener("beforeunload", function () {
+        sessionStorage.removeItem("aloAcademySettingsUnlocked");
+      });
     });
 
     async function loadMaintenanceSettings() {
