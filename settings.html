@@ -696,6 +696,11 @@
       window.addEventListener("beforeunload", function () {
         sessionStorage.removeItem("aloAcademySettingsUnlocked");
       });
+
+      // PIN-Flag löschen, wenn der Benutzer die "Zurück"-Taste des Browsers verwendet
+      window.addEventListener("popstate", function () {
+        sessionStorage.removeItem("aloAcademySettingsUnlocked");
+      });
     });
 
     async function loadMaintenanceSettings() {
