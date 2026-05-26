@@ -802,9 +802,9 @@
       const helperButtons = document.querySelectorAll('.helper-btn');
       helperButtons.forEach(button => {
         if (checkbox.checked) {
-          button.classList.remove('hidden');
+          button.style.display = 'inline-block';
         } else {
-          button.classList.add('hidden');
+          button.style.display = 'none';
         }
       });
 
