@@ -798,6 +798,16 @@
           }
       );
 
+      // Hilfe-Buttons sofort ein- oder ausblenden
+      const helperButtons = document.querySelectorAll('.helper-btn');
+      helperButtons.forEach(button => {
+        if (checkbox.checked) {
+          button.classList.remove('hidden');
+        } else {
+          button.classList.add('hidden');
+        }
+      });
+
       alert(
           "Einstellung gespeichert"
       );
