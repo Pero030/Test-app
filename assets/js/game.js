@@ -685,8 +685,8 @@ function helpPrice() {
       gamingmouse: "49.99",
       headphones: "129.00",
       smartwatch: "199.00",
-      protein: "24.50",
-      backpack: "89.00",
+      protein: "24.99",
+      backpack: "89.90",
       keyboard: "149.90",
       lamp: "39.00",
       bottle: "19.95",
@@ -730,8 +730,79 @@ function helpDescription() {
   const product = getCurrentProduct();
   const input = document.getElementById("productDescription");
   if (product && input) {
-    const kw = product.correctKeywords.slice(0, 3).join(", ");
-    input.value = `Entdecke die ${product.title} – perfekt für anspruchsvolle Anwender. Mit ${kw} überzeugt dieses Produkt durch erstklassige Qualität und maximale Performance. Ideal für Profis und Einsteiger gleichermaßen.`;
+    const key = document.getElementById("productSelect")?.value;
+    if (key === "bottle") {
+      input.value = `Edelstahl-Trinkflasche – Dein robuster Begleiter für Sport, Freizeit & Beruf
+Suchst du nach einer nachhaltigen Lösung für deinen täglichen Flüssigkeitsbedarf? Entdecke die Edelstahl-Trinkflasche, die perfekt auf die Bedürfnisse von anspruchsvollen Anwendern zugeschnitten ist. Egal ob eiskaltes Wasser beim intensiven Workout oder heißer Kaffee im Büro – diese Flasche liefert maximale Performance, wann immer du sie brauchst.`;
+    } else if (key === "lamp") {
+      input.value = `Du suchst die ultimative LED Schreibtischlampe für dein Homeoffice oder den Gaming-Desk? Gefunden. Diese smarte Bürolampe vereint modernes Design mit maximaler Performance. Egal ob als dimmbare Tischleuchte beim Arbeiten oder als Leselampe beim Lernen – sie ist ideal für Profis, Studierende und Einsteiger.`;
+    } else if (key === "keyboard") {
+      input.value = `Diese mechanische ${product.title} – rasiert im Match komplett. Per kabelgebundener USB-Verbindung zockst du absolut verzögerungsfrei mit voller Zero-Latency-Garantie. Das fette Vollformat liefert dir das komplette Key-Setup inklusive Numpad. Dank echtem deutschen Layout sind Essentials wie Strg, Entf, Bild↑ und Bild↓ sofort am Start. Absoluter Blickfang ist die krasse RGB-Beleuchtung mit sickem Farbverlauf über die Tasten – clean gecrafted mit fettem Logo direkt über den Pfeiltasten.
+
+        • Mechanische Tastatur
+
+        • Deutsches Layout (Strg, Entf, Bild↑ usw.)
+
+        • RGB‑Beleuchtung mit Farbverlauf
+
+        • Vollformat (inkl. Numpad)
+
+        • Kabelgebunden `;
+    } else if (key === "backpack") {
+      input.value = `Entdecke den perfekten Laptop Rucksack für den Alltag im Büro oder Reisen. Der moderne Rucksack bietet Platz für Laptops bis 15,6 Zoll und überzeugt mit wasserabweisendem Material, ergonomischem Tragekomfort und cleveren Fächern für Zubehör, Dokumente so wie persönliche Gegenstände. Ideal für Arbeit, Schule, Uni oder unterwegs.`;
+    } else if (key === "protein") {
+      input.value = `Dieses Protein Pulver mit Vanillegeschmack unterstützt deine eiweißreiche Ernährung und eignet sich für Sport, Alltag und Regeneration. Eine Portion liefert 24 g Eiweiß und lässt sich einfach mit Wasser, Milch oder einem Pflanzendrink mischen. Die feine Löslichkeit sorgt für eine cremige Konsistenz ohne starkes Klumpen. Das Produkt ist ideal für alle, die ihre tägliche Proteinzufuhr unkompliziert ergänzen möchten.`;
+    } else if (key === "smartwatch") {
+      input.value = `Entdecke die Smartwatch Pro – dein smarter Begleiter für Alltag, Sport und Gesundheit. Dank präzisem GPS-Tracking, Herzfrequenzmessung in Echtzeit und intuitiver Bedienung behältst du deine Aktivitäten und Ziele jederzeit im Blick. Leistungsstark, modern und komfortabel – ideal für alle, die Technik zuverlässig im Alltag nutzen möchten.`;
+    } else if (key === "headphones") {
+      input.value = `Erlebe Musik, Podcasts und Anrufe ganz ohne Kabel. Die Bluetooth Kopfhörer verbinden sich schnell mit deinem Smartphone und bieten dir einen klaren Klang für Alltag, Sport, Schule oder unterwegs. Dank kabellosem Design hast du volle Bewegungsfreiheit, während das integrierte Mikrofon bequemes Telefonieren ermöglicht. Ideal für alle, die praktische, moderne und zuverlässige Kopfhörer suchen.`;
+    } else if (key === "gamingmouse") {
+      input.value = `Präzise. Schnell. Kompakt.
+Unsere kabelgebundene Gaming-Maus mit 16.000 DPI optischem Sensor liefert blitzschnelles Tracking ohne Latenz. Ideal für Shooter, MMO oder MOBA.
+Deine Vorteile auf einen Blick:
+- 16.000 DPI – 6 einstellbare Stufen per Knopfdruck
+- Ultra-leicht (69g) – perfekt für Low-Sens-Gamer & lange Sessions
+- RGB-Beleuchtung – 16,8 Mio. Farben, 4 Effekte
+- Kabelgebunden – kein Input-Lag, keine Batterie
+- Ergonomisch für Rechtshänder – mit rutschfesten Griffen
+Für wen?
+Für Gamer, die eine reaktionsschnelle, leichte und zuverlässige Maus suchen – ohne Kompromisse bei Features oder Verarbeitung.
+Lieferumfang: Maus, Anleitung, Ersatz-Gleitfüße
+Jetzt in den Warenkorb – dein nächster Flick Shot wartet.`;
+    } else if (key === "chair") {
+      input.value = `Erlebe maximalen Komfort und modernes Gaming-Design mit diesem hochwertigen Gaming Stuhl im exklusiven ALO Academy Look. Die ergonomische Form unterstützt deine Haltung bei langen Gaming-Sessions, im Homeoffice oder beim Streaming. Dank der hohen Rückenlehne, den gepolsterten Armlehnen sowie den enthaltenen Nacken- und Lendenkissen sitzt du jederzeit bequem und konzentriert.
+
+Das edle schwarze Kunstleder mit violett-blauen Akzenten verleiht dem Gaming Chair einen futuristischen Premium-Look. Die stabile Konstruktion, die leichtgängigen Rollen und die höhenverstellbare Sitzfläche sorgen für optimale Beweglichkeit und individuelle Anpassung an deinen Schreibtisch.
+
+Ob für ambitionierte Gamer, Content Creator oder das moderne Büro-Setup – dieser ergonomische Gaming Stuhl kombiniert Style, Komfort und Performance auf höchstem Niveau.
+
+Highlights:
+Ergonomischer Gaming Stuhl mit hoher Rückenlehne
+Inklusive Nacken- und Lendenkissen
+Höhenverstellbar und drehbar
+Gepolsterte Armlehnen für mehr Komfort
+Hochwertiges Kunstleder mit Premium-Optik
+Modernes Gaming-Design mit RGB-inspirierten Farbakzenten
+Ideal für Gaming, Homeoffice & Streaming`;
+    } else if (key === "camera") {
+      input.value = `Halte jedes Abenteuer in gestochen scharfer Qualität fest – mit der leistungsstarken 4K Action Kamera von ALO Academy. Ob beim Sport, Reisen, Vloggen, Motorradfahren oder Outdoor-Einsatz: Diese kompakte Ultra-HD Kamera liefert beeindruckende Videoaufnahmen mit hoher Detailgenauigkeit und flüssiger Performance.
+
+Dank des integrierten Displays behältst du deine Aufnahmen jederzeit im Blick. Die robuste Bauweise, die einfache Bedienung sowie die vielseitige Halterung machen die Kamera zum perfekten Begleiter für Action, Content Creation und Alltag. Durch das Weitwinkelobjektiv entstehen dynamische Aufnahmen mit maximalem Sichtfeld.
+
+Die moderne 4K-Technologie sorgt für klare Videos und hochwertige Bilder – ideal für YouTube, TikTok, Instagram oder professionelle Erinnerungen unterwegs.
+
+Highlights:
+4K Ultra HD Action Kamera
+Kompaktes und robustes Design
+Integriertes Display für Live-Ansicht
+Weitwinkelobjektiv für dynamische Aufnahmen
+Ideal für Sport, Reisen & Vlogging
+Einfache Montage dank Action-Halterung
+Perfekt für Outdoor- und Abenteuer-Aufnahmen`;
+    } else {
+      const kw = product.correctKeywords.slice(0, 3).join(", ");
+      input.value = `Entdecke die ${product.title} – perfekt für anspruchsvolle Anwender. Mit ${kw} überzeugt dieses Produkt durch erstklassige Qualität und maximale Performance. Ideal für Profis und Einsteiger gleichermaßen.`;
+    }
   } else {
     showModal("Tipp", "Wähle zuerst ein Produkt aus.");
   }
@@ -741,8 +812,31 @@ function helpMetaTitle() {
   const product = getCurrentProduct();
   const input = document.getElementById("metaTitle");
   if (product && input) {
-    const kw = product.correctKeywords.slice(0, 2).join(" | ");
-    input.value = `${product.title} kaufen – ${kw} | Dein Shop`;
+    const key = document.getElementById("productSelect")?.value;
+    if (key === "bottle") {
+      input.value = "Edelstahl Trinkflasche BPA-frei & auslaufsicher";
+    } else if (key === "lamp") {
+      input.value = "Moderne LED Schreibtischlampe & Bürolampe dimmbar";
+    } else if (key === "keyboard") {
+      input.value = "Gaming Tastatur mechanisch – RGB, Numpad & Zero Latency";
+    } else if (key === "backpack") {
+      input.value = "Laptop Rucksack 15,6 Zoll kaufen | Wasserdicht & Modern";
+    } else if (key === "protein") {
+      input.value = "Protein Pulver Vanille kaufen, 24 g Eiweiß pro Portion.";
+    } else if (key === "smartwatch") {
+      input.value = "Smartwatch Pro mit GPS & Herzfrequenz | Fitness Smartwatch für Alltag & Sport.";
+    } else if (key === "headphones") {
+      input.value = "Bluetooth Kopfhörer kabellos mit Mikrofon kaufen";
+    } else if (key === "gamingmouse") {
+      input.value = "Gaming Maus kabelgebunden 16.000 DPI ultra-leicht RGB";
+    } else if (key === "chair") {
+      input.value = "Ergonomischer Gaming Stuhl mit Nacken- und Lendenkissen, höhenverstellbar und ideal für Gaming, Homeoffice & Streaming. Modernes Premium-Design.";
+    } else if (key === "camera") {
+      input.value = "Leistungsstarke 4K Action Kamera mit Ultra-HD-Qualität, Weitwinkelobjektiv und Display. Ideal für Sport, Reisen, Vlogging und Outdoor-Abenteuer.";
+    } else {
+      const kw = product.correctKeywords.slice(0, 2).join(" | ");
+      input.value = `${product.title} kaufen – ${kw} | Dein Shop`;
+    }
   } else {
     showModal("Tipp", "Wähle zuerst ein Produkt aus.");
   }
@@ -752,8 +846,29 @@ function helpAltText() {
   const product = getCurrentProduct();
   const input = document.getElementById("altText");
   if (product && input) {
-    const kw = product.correctKeywords.slice(0, 3).join(", ");
-    input.value = `Produktfoto ${product.title} mit ${kw} auf neutralem Hintergrund`;
+    const key = document.getElementById("productSelect")?.value;
+    if (key === "bottle") {
+      input.value = "Schwarze Trinkflasche aus Edelstahl mit dem Nexora Logo, auf neutralem Hintergrund";
+    } else if (key === "keyboard") {
+      input.value = "Produktfoto Mechanische Gaming-Tastatur mit RGB-Beleuchtung auf neutralem Hintergrund";
+    } else if (key === "backpack") {
+      input.value = "Produktfoto Schwarzer Laptop Rucksack für 15,6 Zoll Notebook im modernem Design auf neutralem Hintergrund";
+    } else if (key === "protein") {
+      input.value = "Produktfoto Protein Pulver Dose in Schwarz mit Goldener schrift auf neutralem Hintergrund";
+    } else if (key === "smartwatch") {
+      input.value = "Produktfoto Smartwatch Pro mit GPS- und Herzfrequenzanzeige auf neutralem Hintergrund";
+    } else if (key === "headphones") {
+      input.value = "Produktfoto Schwarze Bluetooth Kopfhörer mit LED verschiedene Farben, Noise Cancelling, kabellos auf neutralem Hintergrund";
+    } else if (key === "gamingmouse") {
+      input.value = "Produktfoto Kabelgebundene Gaming Maus mit 16000 DPI, RGB Beleuchtung aus verschiedenen Winkeln auf neutralem Hintergrund";
+    } else if (key === "chair") {
+      input.value = "Produktfoto Ergonomischer schwarzer Gaming Stuhl mit violett-blauen Akzenten, hoher Rückenlehne, Armlehnen sowie Nacken- und Lendenkissen neutralem Hintergrund";
+    } else if (key === "camera") {
+      input.value = "Schwarze 4K Ultra HD Action Kamera mit Weitwinkelobjektiv, integriertem Display und Halterung auf neutralem Hintergrund";
+    } else {
+      const kw = product.correctKeywords.slice(0, 3).join(", ");
+      input.value = `Produktfoto ${product.title} mit ${kw} auf neutralem Hintergrund`;
+    }
   } else {
     showModal("Tipp", "Wähle zuerst ein Produkt aus.");
   }
@@ -775,8 +890,15 @@ function helpConversion() {
   const product = getCurrentProduct();
   const input = document.getElementById("conversionText");
   if (product && input) {
-    const kw = product.correctKeywords.slice(0, 3).join(", ");
-    input.value = `Sichere dir jetzt die ${product.title} mit ${kw}! Kostenloser Versand, 30 Tage Geld-zurück-Garantie und exklusive Angebote nur für kurze Zeit. Vertrauen auf Qualität – überzeuge dich selbst und bestelle noch heute!`;
+    const key = document.getElementById("productSelect")?.value;
+    if (key === "chair") {
+      input.value = "Sichere dir jetzt die Gaming Stuhl mit Gaming Stuhl, Ergonomisch, mit modernem ALO Academy Design! Kostenloser Versand, 30 Tage Geld-zurück-Garantie und exklusive Angebote nur für kurze Zeit. Vertrauen auf Qualität – überzeuge dich selbst und bestelle noch heute!";
+    } else if (key === "camera") {
+      input.value = "Kompakte 4K Action Kamera mit Ultra-HD-Auflösung, Weitwinkelobjektiv und praktischem Display. Perfekt für Sport, Reisen, Vlogging und actionreiche Aufnahmen unterwegs.";
+    } else {
+      const kw = product.correctKeywords.slice(0, 3).join(", ");
+      input.value = `Sichere dir jetzt die ${product.title} mit ${kw}! Kostenloser Versand, 30 Tage Geld-zurück-Garantie und exklusive Angebote nur für kurze Zeit. Vertrauen auf Qualität – überzeuge dich selbst und bestelle noch heute!`;
+    }
   } else {
     showModal("Tipp", "Wähle zuerst ein Produkt aus.");
   }
