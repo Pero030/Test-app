@@ -6,6 +6,27 @@ let currentTutorial = 0;
 let selectedImageUrl = '';
 let seoWords = [];
 
+// --- E-Commerce Hilfe-Buttons Einstellung ---
+async function loadEcommerceHelperButtonsSetting() {
+  try {
+    const { db, doc, getDoc } = await import('../assets/js/firebase.js');
+    const snapshot = await getDoc(doc(db, 'settings', 'ecommerce'));
+
+    if (snapshot.exists()) {
+      const data = snapshot.data();
+      const helperButtonsEnabled = data.helperButtonsEnabled !== false; // Standardmäßig true
+
+      // Hilfe-Buttons ein- oder ausblenden
+      const helperButtons = document.querySelectorAll('.helper-btn');
+      helperButtons.forEach(button => {
+        button.style.display = helperButtonsEnabled ? 'inline-block' : 'none';
+      });
+    }
+  } catch (error) {
+    console.error('Fehler beim Laden der E-Commerce Hilfe-Buttons Einstellung:', error);
+  }
+}
+
 // --- Initialisierung ---
 document.addEventListener('DOMContentLoaded', () => {
   const hasSave = localStorage.getItem('ecommerceAcademySave');
@@ -17,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startFreshGameAfterBeenden();
     return;
   }
-  
+
   if (hasSave && hasName) {
     // Spiel läuft bereits -> Daten laden und dort weitermachen
     loadGame();
@@ -29,14 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
     showElement('gameContent');
     const layout = document.getElementById('gameContent');
     if (layout) layout.style.display = 'grid';
-    
+
     const sidebarStartBtn = document.getElementById('sidebarStartBtn');
     const restartBtn = document.querySelector('.restart-btn');
     if (sidebarStartBtn) sidebarStartBtn.style.display = 'flex';
     if (restartBtn) restartBtn.style.display = 'none';
-    
+
     goToTask('introSection');
   }
+
+  // E-Commerce Hilfe-Buttons Einstellung laden
+  loadEcommerceHelperButtonsSetting();
 });
 
 // --- Speicher-System ---
