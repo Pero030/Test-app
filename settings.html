@@ -153,6 +153,17 @@
                         🛠️ Wartung
                     </div>
 
+                    <div
+                        class="mission blue-border"
+                        id="settingsTabEcommerce"
+                        role="button"
+                        tabindex="0"
+                        onclick="showSettingsSection('ecommerce')"
+                        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showSettingsSection('ecommerce'); }"
+                    >
+                        🛒 E-Commerce
+                    </div>
+
                 </aside>
 
                 <div class="content" style=" margin-left:-40px;">
@@ -284,48 +295,60 @@
 
                             </div>
 
-                            <!-- HILFE-BUTTONS E-COMMERCE -->
+                        </div>
+
+                    </div>
+
+                    <!-- E-COMMERCE -->
+
+                    <div
+                        id="sectionEcommerce"
+                        style="display:none; width: 100%;"
+                    >
+
+                        <div
+                            class="glass-card blue-theme"
+                            style="padding:35px;"
+                        >
+
+                            <h2 style="margin-bottom:25px;">
+                                E-Commerce Einstellungen
+                            </h2>
 
                             <div
-                                class="glass-card purple-theme"
-                                style="padding:35px; margin-top:30px;"
+                                style="
+                                    display:flex;
+                                    align-items:center;
+                                    gap:15px;
+                                    padding:25px;
+                                    background:rgba(56,189,248,0.08);
+                                    border-radius:15px;
+                                    border:1px solid rgba(56,189,248,0.2);
+                                "
                             >
 
-                                <h2 style="margin-bottom:25px;">
-                                    Hilfe-Buttons E-Commerce
-                                </h2>
-
-                                <div
+                                <input
+                                    type="checkbox"
+                                    id="ecommerceHelperButtons"
+                                    onchange="saveEcommerceHelperButtonsSetting()"
                                     style="
-                                        display:flex;
-                                        align-items:center;
-                                        gap:15px;
+                                        width:24px;
+                                        height:24px;
+                                        cursor:pointer;
                                     "
                                 >
 
-                                    <input
-                                        type="checkbox"
-                                        id="ecommerceHelperButtons"
-                                        onchange="saveEcommerceHelperButtonsSetting()"
-                                        style="
-                                            width:20px;
-                                            height:20px;
-                                            cursor:pointer;
-                                        "
-                                    >
-
-                                    <label
-                                        for="ecommerceHelperButtons"
-                                        style="
-                                            font-size:16px;
-                                            color:rgba(255,255,255,0.82);
-                                            cursor:pointer;
-                                        "
-                                    >
-                                        Hilfe-Buttons bei E-Commerce anzeigen
-                                    </label>
-
-                                </div>
+                                <label
+                                    for="ecommerceHelperButtons"
+                                    style="
+                                        font-size:18px;
+                                        color:rgba(255,255,255,0.9);
+                                        cursor:pointer;
+                                        font-weight:600;
+                                    "
+                                >
+                                    Hilfe-Buttons bei E-Commerce anzeigen
+                                </label>
 
                             </div>
 
@@ -721,9 +744,6 @@
       document.getElementById(
           "activeMaintenanceBox"
       ).style.display = "block";
-
-      // E-Commerce Hilfe-Buttons Einstellung laden
-      loadEcommerceHelperButtonsSetting();
     }
 
     async function loadEcommerceHelperButtonsSetting() {
@@ -1315,6 +1335,11 @@
                 "sectionWartung"
             );
 
+        const ecommerce =
+            document.getElementById(
+                "sectionEcommerce"
+            );
+
         const mitteilungenBtn =
             document.getElementById(
                 "settingsTabMitteilungen"
@@ -1325,10 +1350,18 @@
                 "settingsTabWartung"
             );
 
+        const ecommerceBtn =
+            document.getElementById(
+                "settingsTabEcommerce"
+            );
+
         mitteilungen.style.display =
             "none";
 
         wartung.style.display =
+            "none";
+
+        ecommerce.style.display =
             "none";
 
         mitteilungenBtn.classList.remove(
@@ -1336,6 +1369,10 @@
         );
 
         wartungBtn.classList.remove(
+            "active"
+        );
+
+        ecommerceBtn.classList.remove(
             "active"
         );
 
@@ -1359,6 +1396,18 @@
             );
 
             loadMaintenanceSettings();
+        }
+
+        if (section === "ecommerce") {
+
+            ecommerce.style.display =
+                "block";
+
+            ecommerceBtn.classList.add(
+                "active"
+            );
+
+            loadEcommerceHelperButtonsSetting();
         }
     }
 
