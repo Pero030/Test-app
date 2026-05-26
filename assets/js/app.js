@@ -9,22 +9,54 @@ let seoWords = [];
 // --- E-Commerce Hilfe-Buttons Einstellung ---
 async function loadEcommerceHelperButtonsSetting() {
   try {
-    const { db, doc, getDoc } = await import('../assets/js/firebase.js');
+    const { db, doc, getDoc } = await import('./firebase.js');
     const snapshot = await getDoc(doc(db, 'settings', 'ecommerce'));
 
     if (snapshot.exists()) {
       const data = snapshot.data();
       const helperButtonsEnabled = data.helperButtonsEnabled !== false; // Standardmäßig true
 
+      console.log('Hilfe-Buttons Einstellung geladen:', helperButtonsEnabled);
+
       // Hilfe-Buttons ein- oder ausblenden
       const helperButtons = document.querySelectorAll('.helper-btn');
+      console.log('Anzahl der Hilfe-Buttons:', helperButtons.length);
       helperButtons.forEach(button => {
-        button.style.display = helperButtonsEnabled ? 'inline-block' : 'none';
+        if (helperButtonsEnabled) {
+          button.classList.remove('hidden');
+          console.log('Hilfe-Button angezeigt');
+        } else {
+          button.classList.add('hidden');
+          console.log('Hilfe-Button ausgeblendet');
+        }
+      });
+    } else {
+      console.log('Keine Einstellung für Hilfe-Buttons gefunden, standardmäßig aktiviert');
+      // Standardmäßig aktiviert
+      const helperButtons = document.querySelectorAll('.helper-btn');
+      helperButtons.forEach(button => {
+        button.classList.remove('hidden');
       });
     }
   } catch (error) {
     console.error('Fehler beim Laden der E-Commerce Hilfe-Buttons Einstellung:', error);
   }
+}
+
+// Funktion zum sofortigen Ausblenden der Hilfe-Buttons
+function hideHelperButtons() {
+  const helperButtons = document.querySelectorAll('.helper-btn');
+  helperButtons.forEach(button => {
+    button.classList.add('hidden');
+  });
+}
+
+// Funktion zum sofortigen Anzeigen der Hilfe-Buttons
+function showHelperButtons() {
+  const helperButtons = document.querySelectorAll('.helper-btn');
+  helperButtons.forEach(button => {
+    button.classList.remove('hidden');
+  });
 }
 
 // --- Initialisierung ---
