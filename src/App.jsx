@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { getAppPathname } from "./utils/routing.js";
 
 const HomePage = lazy(() =>
   import("./pages/HomePage.jsx").then((module) => ({ default: module.HomePage })),
@@ -30,7 +31,7 @@ const routes = [
 ];
 
 export function App() {
-  const pathname = decodeURI(window.location.pathname);
+  const pathname = getAppPathname();
   const route = routes.find((entry) => entry.match.test(pathname));
   const Page = route ? route.Page : HomePage;
 

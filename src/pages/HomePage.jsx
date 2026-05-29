@@ -5,6 +5,7 @@ import { ThemeButton } from "../components/ThemeButton.jsx";
 import { LegalContent } from "../content/legalContent.jsx";
 import { useMaintenanceCheck } from "../hooks/useMaintenanceCheck.js";
 import { usePreventZoom } from "../hooks/usePreventZoom.js";
+import { appUrl } from "../utils/routing.js";
 
 const heroCardStyle = {
   position: "relative",
@@ -68,8 +69,8 @@ export function HomePage() {
   function acceptCookies() {
     localStorage.setItem("cookieConsentAccepted", "true");
     document.body.classList.remove("modal-open");
-    if (targetGame === "E-Commerce") window.location.href = "E-Commerce/";
-    if (targetGame === "Büromanagement") window.location.href = "Büromanagement/";
+    if (targetGame === "E-Commerce") window.location.href = appUrl("E-Commerce/");
+    if (targetGame === "Büromanagement") window.location.href = appUrl("Büromanagement/");
   }
 
   function closeLegalModal() {

@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "./",
+  base: process.env.GITHUB_PAGES === "true" ? "/Test-app/" : "/",
   build: {
     rollupOptions: {
       input: {

@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { initializeApp } from "firebase/app";
 
 import {
   getFirestore,
@@ -11,7 +11,7 @@ import {
   orderBy,
   setDoc,
   query
-} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQp1Y5RZ8PIkagkzQgeIxVt0o7Q3vt6K4",
