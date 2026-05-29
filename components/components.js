@@ -117,6 +117,9 @@ import {
 
   function deleteSingleInfo(infoId, button) {
 
+    // ID dekodieren
+    const decodedId = decodeURIComponent(infoId);
+
     const hiddenInfos =
         JSON.parse(
             localStorage.getItem(
@@ -124,9 +127,9 @@ import {
             ) || "[]"
         );
 
-    if (!hiddenInfos.includes(infoId)) {
+    if (!hiddenInfos.includes(decodedId)) {
 
-        hiddenInfos.push(infoId);
+        hiddenInfos.push(decodedId);
 
         localStorage.setItem(
             "aloAcademyHiddenInfos",
@@ -270,7 +273,7 @@ import {
 
                 '<span style="background: rgba(34,197,94,0.16); color: #86efac; border: 1px solid rgba(34,197,94,0.35); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 800;">Gelesen</span>' +
 
-                '<button onclick="deleteSingleInfo(\'' + id + '\', this)" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
+                '<button onclick="deleteSingleInfo(\'' + encodeURIComponent(id) + '\', this)" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
 
               '</div>'
 
@@ -278,7 +281,7 @@ import {
 
                 '<button onclick="markInfoRead(\'' + encodeURIComponent(id) + '\', this)" style="background:#22c55e; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Gelesen</button>' +
 
-                '<button onclick="deleteSingleInfo(\'' + id + '\', this)" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
+                '<button onclick="deleteSingleInfo(\'' + encodeURIComponent(id) + '\', this)" style="background:#ef4444; color:white; border:none; padding:8px 13px; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;">Löschen</button>' +
 
               '</div>';
 
