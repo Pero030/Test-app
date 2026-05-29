@@ -6,6 +6,7 @@
     </div>
     <div class="topbar-right">
       <button onclick="openInfoBell()" aria-label="Infos anzeigen" title="Infos" style="position: relative; background: rgba(56, 189, 248, 0.15); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(56,189,248,0.4); cursor: pointer; font-weight: bold;">🔔<span data-info-count style="display: none; position: absolute; top: -7px; right: -7px; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #ef4444; color: white; font-size: 11px; line-height: 20px; font-weight: 900;"></span></button>
+      <button onclick="toggleTheme()" aria-label="Farbdesign wechseln" title="Farbdesign wechseln" style="background: rgba(251, 191, 36, 0.18); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(251,191,36,0.45); cursor: pointer; font-weight: bold;">🎨</button>
       <button onclick="openSettingsPin('.')" aria-label="Einstellungen" title="Einstellungen" style="background: rgba(168, 85, 247, 0.18); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(168,85,247,0.45); cursor: pointer; font-weight: bold;">⚙️</button>
     </div>
   </header>
@@ -14,13 +15,14 @@
 <template data-component-template="header" data-variant="settings">
   <!-- HEADER (Settings-Seite mit Zur Startseite Button) -->
   <header class="topbar">
-    <div class="logo-area" onclick="location.href='./'" style="cursor: pointer;">
+    <div class="logo-area" onclick="sessionStorage.removeItem('aloAcademySettingsUnlocked'); location.href='./'" style="cursor: pointer;">
       <img src="assets/images/Logo/Logo.png" alt="Logo" class="main-logo">
     </div>
     <div class="topbar-right">
       <button onclick="openInfoBell()" aria-label="Infos anzeigen" title="Infos" style="position: relative; background: rgba(56, 189, 248, 0.15); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(56,189,248,0.4); cursor: pointer; font-weight: bold;">🔔<span data-info-count style="display: none; position: absolute; top: -7px; right: -7px; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #ef4444; color: white; font-size: 11px; line-height: 20px; font-weight: 900;"></span></button>
+      <button onclick="toggleTheme()" aria-label="Farbdesign wechseln" title="Farbdesign wechseln" style="background: rgba(251, 191, 36, 0.18); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(251,191,36,0.45); cursor: pointer; font-weight: bold;">🎨</button>
       <button
-          onclick="location.href='./'"
+          onclick="sessionStorage.removeItem('aloAcademySettingsUnlocked'); location.href='./'"
           aria-label="Zur Startseite"
           style="
               background: #38bdf8;
@@ -55,6 +57,7 @@
             </a>
             <div class="topbar-right">
                 <button onclick="openInfoBell()" aria-label="Infos anzeigen" title="Infos" style="position: relative; background: rgba(56, 189, 248, 0.15); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(56,189,248,0.4); cursor: pointer; font-weight: bold;">🔔<span data-info-count style="display: none; position: absolute; top: -7px; right: -7px; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #ef4444; color: white; font-size: 11px; line-height: 20px; font-weight: 900;"></span></button>
+                <button onclick="toggleTheme()" aria-label="Farbdesign wechseln" title="Farbdesign wechseln" style="background: rgba(251, 191, 36, 0.18); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(251,191,36,0.45); cursor: pointer; font-weight: bold;">🎨</button>
                 <button onclick="openSettingsPin('..')" aria-label="Einstellungen" title="Einstellungen" style="background: rgba(168, 85, 247, 0.18); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(168,85,247,0.45); cursor: pointer; font-weight: bold;">⚙️</button>
                 <button
                     onclick="confirmRestart('home')"
@@ -109,6 +112,7 @@
             </a>
             <div class="topbar-right">
                 <button onclick="openInfoBell()" aria-label="Infos anzeigen" title="Infos" style="position: relative; background: rgba(56, 189, 248, 0.15); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(56,189,248,0.4); cursor: pointer; font-weight: bold;">🔔<span data-info-count style="display: none; position: absolute; top: -7px; right: -7px; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #ef4444; color: white; font-size: 11px; line-height: 20px; font-weight: 900;"></span></button>
+                <button onclick="toggleTheme()" aria-label="Farbdesign wechseln" title="Farbdesign wechseln" style="background: rgba(251, 191, 36, 0.18); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(251,191,36,0.45); cursor: pointer; font-weight: bold;">🎨</button>
                 <button onclick="openSettingsPin('..')" aria-label="Einstellungen" title="Einstellungen" style="background: rgba(168, 85, 247, 0.18); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(168,85,247,0.45); cursor: pointer; font-weight: bold;">⚙️</button>
                 <button
                     onclick="location.href='../'"
@@ -146,6 +150,7 @@
             </a>
             <div class="topbar-right">
                 <button onclick="openInfoBell()" aria-label="Infos anzeigen" title="Infos" style="position: relative; background: rgba(56, 189, 248, 0.15); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(56,189,248,0.4); cursor: pointer; font-weight: bold;">🔔<span data-info-count style="display: none; position: absolute; top: -7px; right: -7px; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #ef4444; color: white; font-size: 11px; line-height: 20px; font-weight: 900;"></span></button>
+                <button onclick="toggleTheme()" aria-label="Farbdesign wechseln" title="Farbdesign wechseln" style="background: rgba(251, 191, 36, 0.18); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(251,191,36,0.45); cursor: pointer; font-weight: bold;">🎨</button>
                 <button onclick="openSettingsPin('..')" aria-label="Einstellungen" title="Einstellungen" style="background: rgba(168, 85, 247, 0.18); color: white; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 1px solid rgba(168,85,247,0.45); cursor: pointer; font-weight: bold;">⚙️</button>
                 <button
                     onclick="confirmRestart('home')"

@@ -5,6 +5,11 @@
     font-family: "Inter", sans-serif;
 }
 
+/* Hilfe-Buttons ausblenden, wenn die Einstellung deaktiviert ist */
+.helper-btn.hidden {
+    display: none !important;
+}
+
 html {
     zoom: 1 !important;
 }
