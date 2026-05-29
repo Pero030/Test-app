@@ -1,0 +1,5 @@
+@import "../../assets/css/style.css";
+
+.react-page-shell {
+  min-height: 100vh;
+}
