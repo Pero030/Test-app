@@ -516,6 +516,77 @@ import {
     updateInfoBadge();
   }
 
+  function toggleTheme() {
+    // Aktuelles Theme aus localStorage lesen oder Standard verwenden
+    const currentTheme = localStorage.getItem('aloAcademyTheme') || 'default';
+    
+    // Theme zyklisch wechseln: default -> dark -> light -> default
+    let newTheme;
+    if (currentTheme === 'default') {
+      newTheme = 'dark';
+    } else if (currentTheme === 'dark') {
+      newTheme = 'light';
+    } else {
+      newTheme = 'default';
+    }
+    
+    // Theme im localStorage speichern
+    localStorage.setItem('aloAcademyTheme', newTheme);
+    
+    // Theme auf das body-Element anwenden
+    applyTheme(newTheme);
+  }
+
+  function applyTheme(theme) {
+    // Alle Theme-Klassen entfernen
+    document.body.classList.remove('theme-default', 'theme-dark', 'theme-light');
+    
+    // Neue Theme-Klasse hinzufügen
+    document.body.classList.add('theme-' + theme);
+    
+    // CSS für das Theme dynamisch hinzufügen
+    let styleElement = document.getElementById('theme-styles');
+    if (!styleElement) {
+      styleElement = document.createElement('style');
+      styleElement.id = 'theme-styles';
+      document.head.appendChild(styleElement);
+    }
+    
+    if (theme === 'default') {
+      styleElement.textContent = '';
+    } else if (theme === 'dark') {
+      styleElement.textContent = `
+        body.theme-dark {
+          background: #000000 !important;
+          background-image: none !important;
+          color: #ffffff !important;
+        }
+        body.theme-dark * {
+          animation: none !important;
+          transition: none !important;
+        }
+      `;
+    } else if (theme === 'light') {
+      styleElement.textContent = `
+        body.theme-light {
+          background: #ffffff !important;
+          background-image: none !important;
+          color: #1e293b !important;
+        }
+        body.theme-light * {
+          animation: none !important;
+          transition: none !important;
+        }
+      `;
+    }
+  }
+
+  // Theme beim Laden der Seite anwenden
+  function loadTheme() {
+    const savedTheme = localStorage.getItem('aloAcademyTheme') || 'default';
+    applyTheme(savedTheme);
+  }
+
   window.openInfoBell = openInfoBell;
   window.closeInfoBell = closeInfoBell;
   window.markInfoRead = markInfoRead;
@@ -525,10 +596,15 @@ import {
   window.closeSettingsPinModal = closeSettingsPinModal;
   window.updateInfoBadge = updateInfoBadge;
   window.deleteSingleInfo = deleteSingleInfo;
+  window.toggleTheme = toggleTheme;
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", loadComponents);
+    document.addEventListener("DOMContentLoaded", () => {
+      loadComponents();
+      loadTheme();
+    });
   } else {
     loadComponents();
+    loadTheme();
   }
 })();
