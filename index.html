@@ -119,9 +119,6 @@
 </head>
 <body data-page="Startseite">
   <div data-component="header" data-variant="home" data-component-base="."></div>
-  
-  <!-- Farbdesign-Wechsel-Button (temporär direkt eingefügt) -->
-  <button id="themeButton" onclick="testTheme()" aria-label="Farbdesign wechseln" title="Farbdesign wechseln" style="position: fixed; top: 27px; right: 140px; background: #fbbf24; color: #000; width: 46px; height: 46px; padding: 0; border-radius: 12px; font-size: 22px; border: 2px solid #fbbf24; cursor: pointer; font-weight: bold; z-index: 99999;">🎨</button>
 
   <!-- MAIN LANDING AREA -->
   <main class="landing-main">
@@ -186,16 +183,6 @@
   <script type="module" src="components/components.js"></script>
   <script src="assets/js/game.js"></script>
   <script>
-    // Test-Funktion für den Theme-Button
-    function testTheme() {
-      alert('Button wurde geklickt!');
-      if (typeof toggleTheme === 'function') {
-        toggleTheme();
-      } else {
-        console.error('toggleTheme Funktion nicht gefunden');
-      }
-    }
-    
     // Zoomen vollständig verhindern
     document.addEventListener('gesturestart', function(e) {
       e.preventDefault();
