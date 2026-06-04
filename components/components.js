@@ -1239,15 +1239,60 @@ import {
       mount.outerHTML = template.innerHTML;
       safelyApplyThemeMode();
       updateInfoBadge();
+      setupResponsiveHeaderMenu();
     } catch (error) {
       console.error("Komponente konnte nicht geladen werden: " + name + "/" + variant, error);
     }
   }
 
+  function setupResponsiveHeaderMenu() {
+    document.querySelectorAll(".topbar").forEach(function(header) {
+      const actions = header.querySelector(".topbar-right");
+      if (!actions || header.querySelector(".topbar-menu-toggle")) return;
+
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "topbar-menu-toggle";
+      toggle.setAttribute("aria-label", "Menü öffnen");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.textContent = "☰";
+
+      toggle.addEventListener("click", function(event) {
+        event.stopPropagation();
+        const isOpen = header.classList.toggle("header-menu-open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        toggle.setAttribute("aria-label", isOpen ? "Menü schließen" : "Menü öffnen");
+      });
+
+      actions.querySelectorAll("button, a").forEach(function(item) {
+        item.addEventListener("click", function() {
+          header.classList.remove("header-menu-open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Menü öffnen");
+        });
+      });
+
+      header.insertBefore(toggle, actions);
+    });
+  }
+
+  document.addEventListener("click", function(event) {
+    document.querySelectorAll(".topbar.header-menu-open").forEach(function(header) {
+      if (header.contains(event.target)) return;
+      header.classList.remove("header-menu-open");
+      const toggle = header.querySelector(".topbar-menu-toggle");
+      if (toggle) {
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Menü öffnen");
+      }
+    });
+  });
+
   function loadComponents() {
     safelyApplyThemeMode();
     document.querySelectorAll("[data-component]").forEach(loadComponent);
     updateInfoBadge();
+    setupResponsiveHeaderMenu();
   }
 
   window.openInfoBell = openInfoBell;
