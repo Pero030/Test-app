@@ -1,0 +1,272 @@
+/* E-Commerce specific responsive fixes */
+
+body[data-page="Ecommerce"] {
+    overflow-x: hidden;
+}
+
+body[data-page="Ecommerce"] * {
+    box-sizing: border-box;
+}
+
+body[data-page="Ecommerce"] img,
+body[data-page="Ecommerce"] video,
+body[data-page="Ecommerce"] canvas {
+    max-width: 100%;
+}
+
+@media (max-width: 1180px) {
+    body[data-page="Ecommerce"] .layout {
+        grid-template-columns: 1fr !important;
+        padding: 24px !important;
+        gap: 24px !important;
+    }
+
+    body[data-page="Ecommerce"] .sidebar {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+    }
+
+    body[data-page="Ecommerce"] .content {
+        grid-column: 1 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    body[data-page="Ecommerce"] #shopBuilderSection > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-page="Ecommerce"] .shop-builder-sidebar {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+    }
+
+    body[data-page="Ecommerce"] .shop-builder-scroll-content {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+}
+
+@media (max-width: 820px) {
+    body[data-page="Ecommerce"] {
+        font-size: 16px;
+    }
+
+    body[data-page="Ecommerce"] .layout {
+        padding: 12px !important;
+        gap: 16px !important;
+    }
+
+    body[data-page="Ecommerce"] .section {
+        padding: 20px !important;
+        border-radius: 22px !important;
+    }
+
+    body[data-page="Ecommerce"] .section::after {
+        inset: 3px !important;
+        border-radius: 19px !important;
+    }
+
+    body[data-page="Ecommerce"] .section h1,
+    body[data-page="Ecommerce"] .section h2 {
+        font-size: 28px !important;
+        line-height: 1.15 !important;
+        letter-spacing: 0 !important;
+    }
+
+    body[data-page="Ecommerce"] .section h3 {
+        font-size: 22px !important;
+        line-height: 1.2 !important;
+    }
+
+    body[data-page="Ecommerce"] [style*="grid-template-columns: 1fr 1fr"],
+    body[data-page="Ecommerce"] [style*="grid-template-columns: repeat(3"],
+    body[data-page="Ecommerce"] [style*="grid-template-columns: 400px 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-page="Ecommerce"] [style*="display: flex"] {
+        min-width: 0 !important;
+    }
+
+    body[data-page="Ecommerce"] [style*="min-width: 320px"] {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    body[data-page="Ecommerce"] button {
+        white-space: normal !important;
+    }
+
+    body[data-page="Ecommerce"] .start-screen-card {
+        width: min(94vw, 720px) !important;
+        padding: 28px 20px !important;
+        border-radius: 26px !important;
+    }
+
+    body[data-page="Ecommerce"] .glass-card,
+    body[data-page="Ecommerce"] .skill-card,
+    body[data-page="Ecommerce"] .product-card,
+    body[data-page="Ecommerce"] .quiz-option,
+    body[data-page="Ecommerce"] .preview-card {
+        padding: 20px !important;
+        border-radius: 18px !important;
+        min-width: 0 !important;
+    }
+
+    body[data-page="Ecommerce"] .input-group-wrapper {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+    }
+
+    body[data-page="Ecommerce"] .button-group-inline {
+        flex-wrap: wrap !important;
+        white-space: normal !important;
+    }
+
+    body[data-page="Ecommerce"] #task1Section input,
+    body[data-page="Ecommerce"] #task1Section textarea,
+    body[data-page="Ecommerce"] #task2Section input,
+    body[data-page="Ecommerce"] #task2Section textarea,
+    body[data-page="Ecommerce"] #task3Section input,
+    body[data-page="Ecommerce"] #task3Section textarea {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    body[data-page="Ecommerce"] .shop-builder-sidebar {
+        border-radius: 22px !important;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55) !important;
+    }
+
+    body[data-page="Ecommerce"] .shop-builder-sidebar::after {
+        border-radius: 18px !important;
+    }
+
+    body[data-page="Ecommerce"] .shop-builder-scroll-content {
+        padding: 18px !important;
+        gap: 18px !important;
+    }
+
+    body[data-page="Ecommerce"] .shop-builder-footer {
+        padding: 14px 18px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopBuilderSection label {
+        font-size: 12px !important;
+        letter-spacing: 0.7px !important;
+        margin-bottom: 10px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopBuilderSection select,
+    body[data-page="Ecommerce"] #shopBuilderSection input,
+    body[data-page="Ecommerce"] #shopBuilderSection textarea {
+        width: 100% !important;
+        min-width: 0 !important;
+        font-size: 16px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopBuilderSection [style*="grid-template-columns: repeat("] {
+        grid-template-columns: repeat(auto-fit, minmax(42px, 1fr)) !important;
+    }
+
+    body[data-page="Ecommerce"] #shopBuilderSection [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-page="Ecommerce"] .color-swatch {
+        width: 34px !important;
+        height: 34px !important;
+        justify-self: center;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview {
+        width: 100% !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+        border-radius: 22px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview header {
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 14px !important;
+        flex-wrap: wrap !important;
+        gap: 12px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview [style*="padding: 40px"],
+    body[data-page="Ecommerce"] #shopLivePreview [style*="padding:40px"] {
+        padding: 20px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview [style*="font-size: 42px"],
+    body[data-page="Ecommerce"] #shopLivePreview [style*="font-size:42px"] {
+        font-size: 30px !important;
+        line-height: 1.15 !important;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview [style*="display: flex"] {
+        flex-wrap: wrap !important;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview button,
+    body[data-page="Ecommerce"] #shopLivePreview a {
+        max-width: 100% !important;
+        white-space: normal !important;
+    }
+}
+
+@media (max-width: 520px) {
+    body[data-page="Ecommerce"] .layout {
+        padding: 8px !important;
+    }
+
+    body[data-page="Ecommerce"] .section {
+        padding: 16px !important;
+    }
+
+    body[data-page="Ecommerce"] .sidebar {
+        padding: 14px !important;
+    }
+
+    body[data-page="Ecommerce"] .mission {
+        font-size: 14px !important;
+        padding: 12px !important;
+    }
+
+    body[data-page="Ecommerce"] .shop-builder-scroll-content {
+        padding: 14px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview {
+        font-size: 14px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview [style*="padding: 30px"],
+    body[data-page="Ecommerce"] #shopLivePreview [style*="padding:30px"],
+    body[data-page="Ecommerce"] #shopLivePreview [style*="padding: 25px"],
+    body[data-page="Ecommerce"] #shopLivePreview [style*="padding:25px"] {
+        padding: 16px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopLivePreview [style*="font-size: 32px"],
+    body[data-page="Ecommerce"] #shopLivePreview [style*="font-size:32px"] {
+        font-size: 24px !important;
+    }
+
+    body[data-page="Ecommerce"] #shopBuilderSection [style*="display: flex"] {
+        gap: 8px !important;
+    }
+}
